@@ -3,6 +3,8 @@
 Главная страница по макету Figma «красный конь»: фреймы **Desktop** (1280px), **Tablet** (768px) и **mobile** (412px).
 Чистые HTML + CSS + JS, без сборщиков и зависимостей.
 
+**Сайт:** https://a-revazyan.github.io/krasny-kon/ (GitHub Pages, обновляется автоматически после каждого push в `main`).
+
 ## Как открыть
 
 ```bash
