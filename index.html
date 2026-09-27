@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Красный конь — студия дизайна</title>
+  <meta name="description" content="Красный конь — студия дизайна. Брендинг, веб-дизайн, UI/UX, дизайн упаковки и дизайн-подписка.">
+  <link rel="preload" href="assets/fonts/Monoid-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Golos-UI_Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-intro">
+
+  <!-- Шум поверх всего макета (в Figma — эффект Noise на заливках) -->
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header">
+    <a class="logo" href="#top" aria-label="Красный конь — на главную">
+      <img class="logo__horse" src="assets/img/logo-horse.svg" alt="" width="52" height="51">
+      <img class="logo__word" src="assets/img/logo-wordmark.svg" alt="Красный конь" width="223" height="41">
+    </a>
+    <nav class="header__nav">
+      <a class="header__phone" href="tel:+73537420020">+7(3537)42-00-20</a>
+      <button class="header__cta link-green" type="button" data-open-popup>обсудить проект</button>
+    </nav>
+    <button class="burger" type="button" aria-label="Открыть меню" data-open-menu>
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ 1. ПЕРВЫЙ ЭКРАН ============ -->
+    <section class="hero" id="hero" data-step="0">
+      <div class="hero__intro" aria-hidden="false">
+        <p class="hero__word hero__word--1">Студия</p>
+        <p class="hero__word hero__word--2">дизайна</p>
+        <p class="hero__tagline">Красота без результата –<br>просто декорация. Мы делаем<br>креатив, который двигает<br>бизнес вперёд.</p>
+        <div class="hero__orn" aria-hidden="true"><img src="assets/img/orn-flower-lined.svg" alt=""><img src="assets/img/orn-star.svg" alt=""><img src="assets/img/orn-flower-lined.svg" alt=""></div>
+      </div>
+
+      <button class="hero__play" type="button" aria-label="Смотреть: что мы делаем" data-hero-play>
+        <img src="assets/img/play.svg" alt="" width="62" height="62">
+      </button>
+
+      <div class="hero__cards">
+        <!-- порядок слоёв как в Figma: «дизайн» снизу, «брендинг» сверху -->
+        <article class="hero-card hero-card--3">
+          <h2 class="hero-card__title">Дизайн-подписка</h2>
+          <div class="hero-card__media"><img src="assets/img/horse-subscription.webp" alt="Красный конь в ромбик" loading="eager"></div>
+          <div class="hero-card__text">
+            <p class="hero-card__lead">Закройте все задачи по маркетингу без проблем</p>
+            <p class="hero-card__desc">Ваша выделенная команда на месяц. Креативы для рекламы, презентации, посты для соцсетей</p>
+          </div>
+        </article>
+        <article class="hero-card hero-card--2">
+          <h2 class="hero-card__title">Web UX/UI</h2>
+          <div class="hero-card__media"><img src="assets/img/horse-web.webp" alt="Конь из стрелок-курсоров" loading="eager"></div>
+          <div class="hero-card__text">
+            <p class="hero-card__lead">Превращайте посетителей сайта в клиентов</p>
+            <p class="hero-card__desc">Проектируем удобные и конверсионные интерфейсы. Лендинги, корпоративные сайты, сервисы</p>
+          </div>
+        </article>
+        <article class="hero-card hero-card--1">
+          <h2 class="hero-card__title">Брендинг</h2>
+          <div class="hero-card__media hero-card__media--branding"><img src="assets/img/horse-branding.webp" alt="Конь из фольги" loading="eager"></div>
+          <div class="hero-card__text">
+            <p class="hero-card__lead">Сделайте ваш продукт дорогим <br>и узнаваемым <span class="nowrap">с первого взгляда</span></p>
+            <p class="hero-card__desc">Создаем сильные бренды, которые замечают <br>и запоминают. Логотипы, айдентика, упаковка.</p>
+          </div>
+        </article>
+      </div>
+
+      <!-- планшет и телефон: подсказка горизонтальной прокрутки карточек -->
+      <div class="hero__scrollbar" aria-hidden="true"><span class="hero__dash"></span><span class="hero__arrow"></span></div>
+
+      <button class="btn btn--arrow hero__btn hero__btn--1" type="button" data-hero-next>Далее<img src="assets/img/arrow-white.svg" alt="" width="11" height="20"></button>
+      <button class="btn btn--arrow hero__btn hero__btn--2" type="button" data-hero-next>что еще?<img src="assets/img/arrow-white.svg" alt="" width="11" height="20"></button>
+      <button class="btn btn--red hero__btn hero__btn--3" type="button" data-open-popup>Обсудим?</button>
+    </section>
+
+    <!-- ============ 2. ТЁМНЫЙ БЛОК: слоган, проекты, экспресс-продукты ============ -->
+    <div class="dark">
+
+      <!-- «кирпичики со словами» -->
+      <div class="bricks" aria-label="Ваш бренд заметят и точно запомнят">
+        <span class="bricks__line bricks__line--h"></span>
+        <span class="bricks__line bricks__line--v1"></span>
+        <span class="bricks__line bricks__line--v2"></span>
+        <span class="bricks__line bricks__line--v3"></span>
+        <span class="bricks__line bricks__line--v4"></span>
+        <span class="bricks__word bricks__word--vash">ваш</span>
+        <span class="bricks__word bricks__word--brand">бренд</span>
+        <img class="bricks__hand bricks__hand--zametyat" src="assets/img/word-zametyat.svg" alt="заметят">
+        <span class="bricks__word bricks__word--i">и</span>
+        <img class="bricks__hand bricks__hand--tochno" src="assets/img/word-tochno.svg" alt="точно">
+        <span class="bricks__word bricks__word--zapomnyat">запомнят</span>
+      </div>
+
+      <!-- «Наши проекты» — анимированный куб -->
+      <section class="projects" id="projects">
+        <div class="projects__marquee" aria-hidden="true">
+          <div class="projects__marquee-line projects__marquee-line--1"><span>НАШИПРОЕКТЫНАШИПРОЕКТЫ</span><span>НАШИПРОЕКТЫНАШИПРОЕКТЫ</span></div>
+          <div class="projects__marquee-line projects__marquee-line--2"><span>НАШИПРОЕКТЫНАШИПРОЕКТЫ</span><span>НАШИПРОЕКТЫНАШИПРОЕКТЫ</span></div>
+        </div>
+
+        <div class="projects__row">
+          <div class="cube-scene" data-cube aria-roledescription="карусель" aria-label="Наши проекты">
+            <div class="cube">
+              <!-- порядок граней = порядок проектов при повороте: front → left → back → right -->
+              <div class="cube__face cube__face--front"><img src="assets/img/project-spas.webp" alt=""></div>
+              <div class="cube__face cube__face--left"><img src="assets/img/project-cel.webp" alt=""></div>
+              <div class="cube__face cube__face--back"><img src="assets/img/project-zhel.webp" alt=""></div>
+              <div class="cube__face cube__face--right"><img src="assets/img/project-maslo.webp" alt=""></div>
+            </div>
+          </div>
+
+          <div class="projects__info" aria-live="polite">
+            <h3 class="projects__title" data-project-title>Название</h3>
+            <p class="projects__desc" data-project-desc>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.</p>
+            <a class="link-green projects__more" href="#" data-project-link>подробнее</a>
+          </div>
+        </div>
+
+        <p class="projects__tags" data-project-tags>Айдентика, упаковка</p>
+        <a class="link-green projects__all" href="#">смотреть все проекты</a>
+      </section>
+
+      <!-- «Экспресс-продукты» -->
+      <section class="express" id="express">
+        <h2 class="h2 express__title">Экспресс-продукты</h2>
+        <div class="offer-row" data-drag-scroll>
+          <article class="offer">
+            <div class="offer__top">
+              <img class="offer__icon" src="assets/img/icon-express-logo.svg" alt="" width="54" height="57">
+              <span class="offer__price">140 000 ₽</span>
+            </div>
+            <div class="offer__body">
+              <h3 class="offer__title">Логотип за 5 дней</h3>
+              <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+              <div class="result" data-result>
+                <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
+                <ul class="result__list">
+                  <li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li>
+                </ul>
+              </div>
+            </div>
+            <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
+          </article>
+
+          <article class="offer">
+            <div class="offer__top">
+              <img class="offer__icon offer__icon--landing" src="assets/img/icon-express-landing.svg" alt="" width="33" height="33">
+              <span class="offer__price">210 000 ₽</span>
+            </div>
+            <div class="offer__body">
+              <h3 class="offer__title">лендинг 10-15 дней</h3>
+              <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+              <div class="result" data-result>
+                <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
+                <ul class="result__list">
+                  <li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li>
+                </ul>
+              </div>
+            </div>
+            <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
+          </article>
+
+          <article class="offer">
+            <div class="offer__top">
+              <img class="offer__icon" src="assets/img/icon-express-rebrand.svg" alt="" width="54" height="54">
+              <span class="offer__price">320 000 ₽</span>
+            </div>
+            <div class="offer__body">
+              <h3 class="offer__title">Ребрендинг 20 дней</h3>
+              <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+              <div class="result" data-result>
+                <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
+                <ul class="result__list">
+                  <li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li>
+                </ul>
+              </div>
+            </div>
+            <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ 3. НАШИ УСЛУГИ ============ -->
+    <section class="services" id="services">
+      <div class="services__title-wrap"><h2 class="services__title">наши услуги</h2></div>
+
+      <div class="svc" data-svc>
+        <img class="svc__icon" src="assets/img/svc-branding.svg" alt="" width="90" height="92">
+        <div class="svc__main">
+          <h3 class="svc__name">Брендинг и айдентика</h3>
+          <p class="svc__desc">Мы понимаем, что сильный бренд не доказывает свою важность, а транслирует её через смыслы и визуал. Создаем глубокие системы идентификации, которые формируют доверие на подсознательном уровне. Мы помогаем вам стать тем самым естественным выбором для клиента, к которому тянет без лишних слов.</p>
+          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">Стоимость по запросу</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
+        </div>
+        <button class="svc__toggle" type="button" aria-expanded="false"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
+      </div>
+
+      <div class="svc is-open" data-svc>
+        <img class="svc__icon" src="assets/img/svc-web.svg" alt="" width="90" height="92">
+        <div class="svc__main">
+          <h3 class="svc__name">Веб-дизайн: от лендингов до сложных систем</h3>
+          <p class="svc__desc">Задачи бывают разными: от лаконичного лендинга до масштабных платформ со сложной архитектурой. Мы проектируем цифровую среду, где профессиональная логика встречается с эстетикой. Убираем всё лишнее, чтобы пользователь двигался к цели легко и интуитивно, положительно реагируя на процесс взаимодействия.</p>
+          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">от 120 000 ₽</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
+        </div>
+        <button class="svc__toggle" type="button" aria-expanded="true"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
+      </div>
+
+      <div class="svc" data-svc>
+        <img class="svc__icon" src="assets/img/svc-uiux.svg" alt="" width="90" height="92">
+        <div class="svc__main">
+          <h3 class="svc__name">UI/UX и мобильные приложения</h3>
+          <p class="svc__desc">Мы считаем, что главное в интерфейсе это дружелюбие и забота <br>о пользователе. Поэтому с радостью берем задачи по проектированию сложных сценариев, чтобы ваш продукт стал привычной и приятной частью жизни человека. Создаем дизайн, который влюбляет в себя через удобство, делая каждое касание простым и понятным.</p>
+          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">Стоимость по запросу</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
+        </div>
+        <button class="svc__toggle" type="button" aria-expanded="false"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
+      </div>
+
+      <div class="svc" data-svc>
+        <img class="svc__icon" src="assets/img/svc-creative.svg" alt="" width="90" height="92">
+        <div class="svc__main">
+          <h3 class="svc__name">авторский креатив и рекламные кампании</h3>
+          <p class="svc__desc">Здесь в работу вступает наша органическая генерация: собственными живыми умами придумываем нестандартные идеи для наружной рекламы, перформансов и диджитал-компаний. Мы разрабатываем визуальные стратегии для любых носителей – от билбордов до масштабных перформансов. Помогаем вашему сообщению найти отклик у аудитории, создавая образы, которые притягивают внимание и запоминаются сами собой.</p>
+          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">Стоимость по запросу</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
+        </div>
+        <button class="svc__toggle" type="button" aria-expanded="false"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
+      </div>
+
+      <div class="svc" data-svc>
+        <img class="svc__icon" src="assets/img/svc-support.svg" alt="" width="90" height="92">
+        <div class="svc__main">
+          <h3 class="svc__name">Дизайн-поддержка по подписке</h3>
+          <p class="svc__desc">Идеальное решение для тех, кому нужно постоянное развитие без найма штатного дизайнера. Вы платите фиксированную сумму в месяц и получаете личный «дизайн-отдел», который оперативно закрывает любые задачи: от рекламных баннеров до доработки интерфейса. Гибкий формат, который растет вместе с вашим бизнесом.</p>
+          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">Стоимость по запросу</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
+        </div>
+        <button class="svc__toggle" type="button" aria-expanded="false"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
+      </div>
+
+      <div class="svc" data-svc>
+        <img class="svc__icon" src="assets/img/svc-packaging.svg" alt="" width="90" height="92">
+        <div class="svc__main">
+          <h3 class="svc__name">Дизайн упаковки и мерча</h3>
+          <p class="svc__desc">Мы знаем, что упаковка – это физическое воплощение вашей заботы о клиенте. Создаем дизайн, который выделяет продукт на полке за счет характера, а не кричащих заголовков. Прорабатываем каждую деталь, чтобы первое касание с товаром оставляло приятное послевкусие и желание вернуться за приобретением.</p>
+          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">Стоимость по запросу</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
+        </div>
+        <button class="svc__toggle" type="button" aria-expanded="false"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
+      </div>
+    </section>
+
+    <!-- ============ 4. ДЛЯ КОГО РАБОТАЕМ ============ -->
+    <section class="who" id="who">
+      <h2 class="section-title who__title">для кого работаем</h2>
+
+      <div class="who__list">
+        <!-- Средний бизнес -->
+        <div class="who-block who-block--mid">
+          <div class="who-panel who-panel--boxes">
+            <div class="box" style="left:44.748rem; top:6.82rem"><img class="box__shadow" src="assets/img/box-shadow.svg" alt=""><div class="box__lift"><img class="box__body" src="assets/img/box.svg" alt=""><img class="box__lines" src="assets/img/box-lines-a.svg" alt=""><span class="box__flower"><img src="assets/img/box-flower.png" alt=""></span></div></div>
+            <div class="box" style="left:26.5rem; top:13.1rem"><img class="box__shadow" src="assets/img/box-shadow.svg" alt=""><div class="box__lift"><img class="box__body" src="assets/img/box.svg" alt=""><img class="box__lines" src="assets/img/box-lines-a.svg" alt=""><span class="box__flower"><img src="assets/img/box-flower.png" alt=""></span></div></div>
+            <div class="box" style="left:7.777rem; top:19.736rem"><img class="box__shadow" src="assets/img/box-shadow.svg" alt=""><div class="box__lift"><img class="box__body" src="assets/img/box.svg" alt=""><img class="box__lines" src="assets/img/box-lines-a.svg" alt=""><span class="box__flower"><img src="assets/img/box-flower.png" alt=""></span></div></div>
+          </div>
+          <div class="who-text">
+            <h3 class="h2">Средний бизнес</h3>
+            <div class="who-text__bottom">
+              <p class="who-text__p">Разрабатываем дизайн-системы<br>для упаковки товаров различных<br>сфер бизнеса</p>
+              <div class="ornament"><img src="assets/img/orn-flower.svg" alt=""><img src="assets/img/orn-subtract.svg" alt=""><img src="assets/img/orn-flower.svg" alt=""></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Пищевая промышленность -->
+        <div class="who-block who-block--food">
+          <div class="who-panel who-panel--bottles">
+            <div class="shelf" data-shelf></div>
+          </div>
+          <div class="who-text">
+            <h3 class="h2">пищевая промышленность</h3>
+            <div class="who-text__bottom">
+              <p class="who-text__p">Разрабатываем продающие<br>упаковки товаров</p>
+              <div class="ornament"><img src="assets/img/orn-flower.svg" alt=""><img class="orn-wide" src="assets/img/orn-x.svg" alt=""><img src="assets/img/orn-flower.svg" alt=""></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Малый бизнес -->
+        <div class="who-block who-block--small">
+          <div class="who-panel who-panel--grid">
+            <div class="ec-grid">
+              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+              <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+              <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+              <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+              <div class="ec ec--accent"><div class="ec__img"><img src="assets/img/ec-flower.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+              <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+              <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+            </div>
+          </div>
+          <div class="who-text">
+            <h3 class="h2">малый бизнес</h3>
+            <div class="who-text__bottom">
+              <p class="who-text__p">Упакуем бизнес с нуля!<br>Сделаем вас заметнее<br>и привлекательнее</p>
+              <div class="ornament"><img src="assets/img/orn-flower.svg" alt=""><img src="assets/img/orn-cross.svg" alt=""><img src="assets/img/orn-flower.svg" alt=""></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Для всех -->
+        <div class="who-block who-block--all">
+          <div class="who-panel who-panel--horses">
+            <div class="htile" style="left:7rem; top:7.989rem"><img src="assets/img/horse-tile.svg" alt=""><img class="htile__hover" src="assets/img/horse-tile-hover.svg" alt=""></div>
+            <div class="htile" style="left:26.002rem; top:19.643rem"><img src="assets/img/horse-tile.svg" alt=""><img class="htile__hover" src="assets/img/horse-tile-hover.svg" alt=""></div>
+            <div class="htile" style="left:45.003rem; top:32.48rem"><img src="assets/img/horse-tile.svg" alt=""><img class="htile__hover" src="assets/img/horse-tile-hover.svg" alt=""></div>
+          </div>
+          <div class="who-text">
+            <h3 class="h2">Для всех, кому нужен работающий визуал</h3>
+            <div class="who-text__bottom">
+              <p class="who-text__p">Сделаем крутой дизайн,<br>который будет работать на бизнес</p>
+              <div class="ornament"><img src="assets/img/orn-flower-lined.svg" alt=""><img src="assets/img/orn-star.svg" alt=""><img src="assets/img/orn-flower-lined.svg" alt=""></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. ПРОЦЕСС И СРОКИ ============ -->
+    <section class="process" id="process">
+      <h2 class="section-title">Процесс <span class="nowrap">и сроки</span></h2>
+      <div class="process__body">
+        <ul class="process__list" role="tablist" data-process-list></ul>
+        <div class="process__info">
+          <h3 class="process__name" data-process-name>БРИФ</h3>
+          <p class="process__time" data-process-time>1 день</p>
+          <div class="process__bar" data-process-bar><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="process__desc" data-process-desc></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. ПАКЕТЫ И ЦЕНЫ ============ -->
+    <section class="packages" id="packages">
+      <div class="packages__head">
+        <h2 class="section-title packages__title">пакеты <span class="nowrap">и цены</span></h2>
+        <p class="packages__note">Цены ориентировочные.<br>Точную смету пришлём  в течении 24 часов</p>
+      </div>
+
+      <div class="offer-row" data-drag-scroll>
+        <article class="offer">
+          <div class="offer__top">
+            <img class="offer__icon" src="assets/img/icon-pkg-start.svg" alt="" width="54" height="57">
+            <span class="offer__price">140 000 ₽</span>
+          </div>
+          <div class="offer__body">
+            <h3 class="offer__title">старт</h3>
+            <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+            <div class="result" data-result>
+              <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
+              <ul class="result__list"><li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li></ul>
+            </div>
+          </div>
+          <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
+        </article>
+        <article class="offer">
+          <div class="offer__top">
+            <img class="offer__icon" src="assets/img/icon-pkg-growth.svg" alt="" width="54" height="57">
+            <span class="offer__price">210 000 ₽</span>
+          </div>
+          <div class="offer__body">
+            <h3 class="offer__title">рост</h3>
+            <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+            <div class="result" data-result>
+              <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
+              <ul class="result__list"><li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li></ul>
+            </div>
+          </div>
+          <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
+        </article>
+        <article class="offer">
+          <div class="offer__top">
+            <img class="offer__icon" src="assets/img/icon-pkg-system.svg" alt="" width="54" height="57">
+            <span class="offer__price">320 000 ₽</span>
+          </div>
+          <div class="offer__body">
+            <h3 class="offer__title">система</h3>
+            <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+            <div class="result" data-result>
+              <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
+              <ul class="result__list"><li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li></ul>
+            </div>
+          </div>
+          <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
+        </article>
+      </div>
+
+      <button class="btn btn--red btn--big packages__cta" type="button" data-open-popup>Обсудим проект?</button>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" id="contacts">
+    <div class="footer__green" aria-hidden="true"></div>
+    <!-- конь выходит вверх на блок с ценами, снизу обрезается краем страницы -->
+    <div class="footer__horse-clip" aria-hidden="true"><div class="footer__horse"><div class="footer__horse-inner"><img src="assets/img/horse-3d.webp" alt="" loading="lazy"></div></div></div>
+    <div class="footer__content">
+      <nav class="big-links">
+        <a class="big-link" href="#projects"><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Проекты</span></a>
+        <a class="big-link" href="#services"><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Услуги</span></a>
+        <a class="big-link" href="#contacts"><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">контакты</span></a>
+      </nav>
+      <div class="footer__bottom">
+        <div class="socials">
+          <a href="#" aria-label="Telegram"><img src="assets/img/tg.svg" alt="" width="61" height="52"></a>
+          <a href="#" aria-label="ВКонтакте"><img src="assets/img/vk.svg" alt="" width="74" height="43"></a>
+        </div>
+        <p class="footer__copy">© 2011-2025 Digital интегратор WebCat<br>ИНН 5614087228, ООО ВЕБКАТ</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ МЕНЮ (оверлей) ============ -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <img class="menu__flower" src="assets/img/menu-flower.svg" alt="" aria-hidden="true">
+    <div class="menu__header">
+      <a class="logo" href="#top" data-close-menu aria-label="Красный конь — на главную">
+        <img class="logo__horse" src="assets/img/logo-horse.svg" alt="" width="52" height="51">
+        <img class="logo__word" src="assets/img/logo-wordmark-white.svg" alt="Красный конь" width="223" height="41">
+      </a>
+      <nav class="header__nav">
+        <a class="header__phone header__phone--white" href="tel:+73537420020">+7(3537)42-00-20</a>
+        <button class="header__cta link-green" type="button" data-open-popup>обсудить проект</button>
+      </nav>
+      <button class="menu__close" type="button" aria-label="Закрыть меню" data-close-menu><img src="assets/img/close-white.svg" alt="" width="44" height="44"></button>
+    </div>
+    <nav class="big-links big-links--menu">
+      <a class="big-link" href="#projects" data-close-menu><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Проекты</span></a>
+      <a class="big-link" href="#services" data-close-menu><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Услуги</span></a>
+      <a class="big-link" href="#contacts" data-close-menu><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">контакты</span></a>
+    </nav>
+    <div class="socials menu__socials">
+      <a href="#" aria-label="Telegram"><img src="assets/img/tg.svg" alt="" width="61" height="52"></a>
+      <a href="#" aria-label="ВКонтакте"><img src="assets/img/vk.svg" alt="" width="74" height="43"></a>
+    </div>
+    <p class="menu__copy">© 2011-2025 Digital интегратор WebCat<br> ИНН 5614087228, ООО ВЕБКАТ</p>
+  </div>
+
+  <!-- ============ ПОП-АП «Познакомимся?» ============ -->
+  <div class="popup" id="popup" aria-hidden="true">
+    <div class="popup__overlay" data-close-popup></div>
+    <div class="popup__card" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+      <div class="popup__view popup__view--form">
+        <div class="popup__head">
+          <h2 class="popup__title" id="popup-title" data-popup-title>Познакомимся?</h2>
+          <p class="popup__sub" data-popup-sub>Мы свяжемся с вами в течение<br><span>30 минут</span></p>
+        </div>
+        <button class="popup__close" type="button" aria-label="Закрыть" data-close-popup><img src="assets/img/close-green.svg" alt="" width="32" height="32"></button>
+
+        <form class="popup__form" id="lead-form" novalidate>
+          <input type="hidden" name="service" value="">
+          <div class="popup__fields">
+            <label class="field"><input type="text" name="name" placeholder="От кого" autocomplete="name" required></label>
+            <label class="field"><input type="tel" name="phone" placeholder="Номер телефона" autocomplete="tel" required></label>
+            <label class="field"><input type="text" name="message" placeholder="Коротко опишите запрос"></label>
+          </div>
+          <button class="btn popup__submit" type="submit">отправить</button>
+        </form>
+
+        <div class="stamp" aria-hidden="true">
+          <img class="stamp__border" src="assets/img/stamp-border.svg" alt="">
+          <span class="stamp__bg"></span>
+          <img class="stamp__clouds" src="assets/img/stamp-clouds.svg" alt="">
+          <img class="stamp__horse" src="assets/img/stamp-horse.svg" alt="">
+          <img class="stamp__word" src="assets/img/stamp-wordmark.svg" alt="">
+        </div>
+      </div>
+
+      <!-- состояние после отправки (Figma: popup услуг, state=on click) -->
+      <div class="popup__view popup__view--done" aria-live="polite">
+        <img class="popup__flap" src="assets/img/envelope-flap.svg" alt="">
+        <div class="popup__thanks">
+          <p class="popup__thanks-title">Спасибо за письмо!</p>
+          <p class="popup__thanks-text">Мы перезвоним вам в течение 30 минут</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
