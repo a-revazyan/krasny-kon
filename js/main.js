@@ -159,13 +159,37 @@
   }
 
   /* ---------- 5. Куб «Наши проекты» ---------- */
-  // TODO: заменить заглушки из макета на реальные названия/описания проектов
+  // Порядок = порядок граней при повороте: front → left → back → right.
+  // Описания взяты со страниц кейсов в Figma; теги — по разделам кейса.
   const PROJECTS = [
-    { title: 'Название', desc: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.', tags: 'Айдентика, упаковка', href: '#' },
-    { title: 'Название', desc: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.', tags: 'Айдентика, упаковка', href: '#' },
-    { title: 'Название', desc: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.', tags: 'Айдентика, упаковка', href: '#' },
-    { title: 'Название', desc: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.', tags: 'Айдентика, упаковка', href: '#' },
+    {
+      title: 'Яблочный спас',
+      desc: 'Бренд „Яблочный спас“ пришел к нам на этапе запуска – без фирменного стиля, стратегии и четкого ТЗ. Мы взяли на себя роль креаторов: полностью разработали визуальную концепцию, подобрали фирменные цвета и заложили фундамент бренда. На протяжении всего проекта мы работали в формате полного доверия: сами генерировали идеи и предлагали решения, которые вывели магазин на рынок',
+      tags: 'Айдентика, наружная реклама, SMM',
+      href: '#', // TODO: ссылка на страницу кейса
+    },
+    {
+      title: 'Цель',
+      desc: 'Клиент пришел к нам с запросом на полное обновление визуальной логики продукта. Мы взяли на себя роль проектировщиков пользовательского опыта: разработали чистый функциональный интерфейс, подобрали современную цветовую палитру и собрали гибкую дизайн-систему. Работали в формате полного доверия: сами генерировали продуктовые гипотезы и предлагали UX/UI решения, которые сделали планировщик максимально удобным и выделили его на рынке.',
+      tags: 'UX/UI, веб-дизайн, 3D-персонаж',
+      href: '#',
+    },
+    {
+      title: 'Желен',
+      desc: 'Мясоперерабатывающее предприятие «ЖеЛен» — семейная фабрика мясной гастрономии, основанная в 2003 году. Бренд позиционируется как продукт, сделанный с заботой о семье: он подчёркивает ценность домашнего уюта и вкусных традиций. Ассортимент включает более 170 наименований колбас, сосисок, ветчин и деликатесов.',
+      tags: 'Айдентика, фирменный стиль, реклама',
+      href: '#',
+    },
+    {
+      title: 'Очень молочен',
+      desc: 'Мы начали сотрудничество с компанией «Очень молочен» с разработки нового фирменного стиля и логотипа. Цель стояла не просто создать визуальную айдентику, а разработать современный и узнаваемый образ бренда, который выделит продукцию на полке, подчеркнёт её натуральность и качество, а также будет легко масштабироваться на различные носители.',
+      tags: 'Логотип, фирменный стиль, упаковка',
+      href: '#',
+    },
   ];
+  // Неразрывный пробел после коротких слов, чтобы предлоги не висели в конце строки (как в макетах кейсов)
+  const typo = t => t.replace(/(^|[\s«„(])([а-яёА-ЯЁ]{1,2})\s+/g, '$1$2 ');
+
   (function initCube() {
     const section = $('#projects');
     const scene = $('[data-cube]', section);
@@ -175,33 +199,101 @@
     const tDesc = $('[data-project-desc]', section);
     const tTags = $('[data-project-tags]', section);
     const tLink = $('[data-project-link]', section);
-    let turns = 0, hovered = false, visible = false, timer = null;
+    const BASE = 21;              // исходный разворот куба, как в макете
+    const DEG_PER_PX = 0.32;      // ~280px перетаскивания = одна грань
 
-    function paint() {
-      const idx = ((turns % 4) + 4) % 4;
-      cube.style.setProperty('--ry', 21 + turns * 90 + 'deg');
-      faces.forEach((f, i) => f.classList.toggle('is-side', i === (idx + 1) % 4));
+    let rot = 0;                  // поворот относительно исходного, градусы
+    let shownIdx = 0, textTimer = null;
+    let hovered = false, visible = false, autoTimer = null, idleUntil = 0;
+
+    const indexFor = r => ((Math.round(r / 90) % 4) + 4) % 4;
+
+    function render() {
+      cube.style.setProperty('--ry', BASE + rot + 'deg');
+      // тень на гранях по реальному углу: боковая темнее, фронтальная светлая
+      faces.forEach((f, i) => {
+        const a = (BASE + rot - 90 * i) * Math.PI / 180;
+        f.style.setProperty('--shade', Math.min(.4, Math.max(0, .42 * (1 - Math.cos(a)))).toFixed(3));
+      });
+      const idx = indexFor(rot);
+      if (idx !== shownIdx) showText(idx);
+    }
+
+    function showText(idx) {
+      shownIdx = idx;
+      clearTimeout(textTimer);
       section.classList.add('is-switching');
-      setTimeout(() => {
+      textTimer = setTimeout(() => {
         const p = PROJECTS[idx];
         tTitle.textContent = p.title;
-        tDesc.textContent = p.desc;
+        tDesc.textContent = typo(p.desc);
         tTags.textContent = p.tags;
         tLink.href = p.href;
         section.classList.remove('is-switching');
-      }, 450);
+      }, 300);
     }
-    function next() { turns += 1; paint(); }
+
+    function goTo(r) { rot = r; render(); }
+    function step(dir) { goTo(Math.round(rot / 90) * 90 + 90 * dir); }
+
+    // Автоповорот: пауза при наведении и 10 с после ручного вращения
     function schedule() {
-      clearInterval(timer);
-      if (visible && !hovered && !document.hidden) timer = setInterval(next, 4000);
+      clearInterval(autoTimer);
+      if (!visible || hovered || document.hidden) return;
+      autoTimer = setInterval(() => { if (performance.now() > idleUntil && !dragging) step(1); }, 4000);
     }
-    faces[1].classList.add('is-side');
-    scene.addEventListener('click', () => { next(); schedule(); });
+    const touchIdle = () => { idleUntil = performance.now() + 10000; };
+
+    // Перетаскивание мышью и пальцем
+    let dragging = false, moved = false, startX = 0, startRot = 0, lastX = 0, lastT = 0, velocity = 0, pointerId = null;
+    scene.addEventListener('pointerdown', e => {
+      if (e.button !== 0) return;
+      dragging = true; moved = false; pointerId = e.pointerId;
+      startX = lastX = e.clientX; startRot = rot; lastT = performance.now(); velocity = 0;
+      touchIdle();
+    });
+    scene.addEventListener('pointermove', e => {
+      if (!dragging || e.pointerId !== pointerId) return;
+      const dx = e.clientX - startX;
+      if (!moved && Math.abs(dx) > 4) {
+        moved = true;
+        scene.classList.add('is-dragging');
+        scene.setPointerCapture(pointerId);
+      }
+      if (!moved) return;
+      const now = performance.now();
+      velocity = (e.clientX - lastX) / Math.max(1, now - lastT); // px/мс
+      lastX = e.clientX; lastT = now;
+      goTo(startRot + dx * DEG_PER_PX);
+    });
+    const endDrag = e => {
+      if (!dragging || (e && e.pointerId !== pointerId)) return;
+      dragging = false;
+      scene.classList.remove('is-dragging');
+      touchIdle();
+      // простой клик — следующий проект; отменённый жест (например, вертикальный свайп страницы) — ничего
+      if (!moved) { if (e && e.type === 'pointerup') step(1); return; }
+      let target = Math.round(rot / 90) * 90;
+      // быстрый рывок довершает поворот в сторону движения
+      if (Math.abs(velocity) > .45 && Math.sign(velocity) * (target - rot) <= 0) target += 90 * Math.sign(velocity);
+      goTo(target);
+    };
+    scene.addEventListener('pointerup', endDrag);
+    scene.addEventListener('pointercancel', endDrag);
+    // на тач-экранах касание сначала неявно захвачено гранью; её lostpointercapture всплывает — это не конец жеста
+    scene.addEventListener('lostpointercapture', e => { if (e.target === scene) endDrag(e); });
+
+    scene.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); touchIdle(); step(1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); touchIdle(); step(-1); }
+    });
     scene.addEventListener('mouseenter', () => { hovered = true; schedule(); });
     scene.addEventListener('mouseleave', () => { hovered = false; schedule(); });
     document.addEventListener('visibilitychange', schedule);
     new IntersectionObserver(([en]) => { visible = en.isIntersecting; schedule(); }, { threshold: 0.3 }).observe(scene);
+
+    tDesc.textContent = typo(PROJECTS[0].desc);
+    render();
   })();
 
   /* ---------- 6. Горизонтальные ряды карточек: перетаскивание мышью ---------- */
