@@ -567,7 +567,8 @@ main { padding-top: 13rem; }
 .menu__close img { width: 100%; height: 100%; }
 .menu__flower { position: absolute; left: calc(50% + .8rem); top: -8.6rem; width: 70.1925rem; height: 70.2rem; max-width: none; transition: transform 1.2s var(--gentle); transform: rotate(-30deg) scale(.9); }
 .menu.is-open .menu__flower { transform: none; }
-.big-links--menu { position: absolute; left: 4rem; top: 50%; transform: translateY(-50%); width: 61.7rem; font-size: 9.861rem; gap: 2.6588rem; z-index: 1; }
+.big-links--menu { position: absolute; left: 4rem; top: calc(50% + 2rem); transform: translateY(-50%); width: auto; font-size: 9.861rem; gap: 2.6588rem; z-index: 1; }
+.big-link.is-current .big-link__inner { color: var(--beige); }
 .menu .big-link__inner { transform: translateY(110%); transition: transform .7s var(--gentle); }
 .menu.is-open .big-link__inner { transform: none; }
 .menu.is-open .big-link:nth-child(2) .big-link__inner { transition-delay: .06s; }
@@ -822,7 +823,7 @@ body.is-locked { overflow: hidden; }
 
   /* Меню */
   .menu__flower { left: auto; right: -10.695rem; top: -10.6rem; width: 61.795rem; height: 61.8016rem; }
-  .big-links--menu { top: auto; bottom: 12.78rem; left: 3rem; width: auto; transform: none; gap: 2.059rem; }
+  .big-links--menu { top: auto; bottom: 12.78rem; left: 3rem; width: auto; transform: none; gap: 2.059rem; font-size: 9.4rem; } /* 4 пункта: «Нейровидео» должно влезть в 708px */
   .menu__socials { left: 3rem; bottom: 4rem; gap: 4.012rem; }
   .menu__socials a:first-child img { width: 5.4645rem; height: 4.6839rem; }
   .menu__socials a:last-child img { width: 6.6236rem; height: 3.8347rem; }
@@ -956,7 +957,7 @@ body.is-locked { overflow: hidden; }
   .menu__close { width: 3rem; height: 3rem; }
   .menu__flower { right: auto; left: calc(75% - 1.9rem); top: -5.1rem; width: 46rem; height: 46rem; transform: translateX(-50%); }
   .menu.is-open .menu__flower { transform: translateX(-50%); }
-  .big-links--menu { left: 2rem; bottom: 16.1rem; font-size: 6.549rem; gap: 1.7657rem; }
+  .big-links--menu { left: 2rem; bottom: 16.1rem; font-size: 5rem; gap: 1.4rem; } /* «Нейровидео» во всю ширину 372px */
   .menu__socials { left: 2rem; bottom: 8.4rem; gap: 3.012rem; }
   .menu__copy { left: 2rem; right: auto; bottom: 2rem; font-size: 1.4rem; }
 

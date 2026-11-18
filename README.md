@@ -14,12 +14,20 @@ python3 -m http.server 5178
 
 Затем открыть http://localhost:5178
 
+## Страницы
+
+- `/` — главная.
+- `/neurovideo/` — **Нейровидео**: портфолио роликов. Логика и UX по референсу jasonbergh.com (слайдер на весь экран / список / плеер), UI — из ui-kit «Красного коня». Пункт есть в меню. Видео и постеры берутся с сайта `a-revazyan.github.io` (репозиторий `a-revazyan/a-revazyan.github.io`), каталог работ — `js/neurovideo-data.js`. Ссылка вида `/neurovideo/#glam-squad` открывает конкретную работу.
+
 ## Структура
 
 ```
 index.html          — разметка всей страницы
 css/style.css       — стили: десктоп, затем блоки @media для планшета и телефона
-js/main.js          — масштаб, шум, анимации и интерактив
+js/common.js        — общее для всех страниц: масштаб, шум, шапка, меню, поп-ап
+js/main.js          — главная: первый экран, куб, услуги, процесс и т. д.
+js/neurovideo*.js   — страница «Нейровидео»: данные и логика
+neurovideo/         — страница «Нейровидео»
 assets/fonts/       — Monoid Bold, Golos UI (Regular / Medium / Bold) в woff2
 assets/img/         — ассеты из Figma (SVG, WebP)
 ```

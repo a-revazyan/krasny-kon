@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru" class="nv-page">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Нейровидео — Красный конь</title>
+  <meta name="description" content="Нейровидео студии «Красный конь»: короткие фильмы, сериалы, реклама и эксперименты, созданные с помощью нейросетей.">
+  <link rel="preload" href="../assets/fonts/Monoid-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/Golos-UI_Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/neurovideo.css">
+</head>
+<body class="nv is-loading">
+
+  <div class="noise" aria-hidden="true"></div>
+
+  <!-- Заставка: «НЕЙРО / ВИДЕО» разъезжаются в стороны -->
+  <div class="nv-intro" aria-hidden="true">
+    <span class="nv-intro__word nv-intro__word--l">Нейро</span>
+    <span class="nv-intro__count" data-intro-count>000</span>
+    <span class="nv-intro__word nv-intro__word--r">видео</span>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header header--dark" id="header" data-static>
+    <a class="logo" href="../" aria-label="Красный конь — на главную">
+      <img class="logo__horse" src="../assets/img/logo-horse.svg" alt="" width="52" height="51">
+      <img class="logo__word" src="../assets/img/logo-wordmark-white.svg" alt="Красный конь" width="223" height="41">
+    </a>
+    <nav class="header__nav">
+      <a class="header__phone header__phone--white" href="tel:+73537420020">+7(3537)42-00-20</a>
+      <button class="header__cta link-green" type="button" data-open-popup>обсудить проект</button>
+    </nav>
+    <button class="burger" type="button" aria-label="Открыть меню" data-open-menu>
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Линейки по краям экрана -->
+  <div class="nv-ruler nv-ruler--l" aria-hidden="true"><div class="nv-ruler__track" data-ruler></div></div>
+  <div class="nv-ruler nv-ruler--r" aria-hidden="true"><div class="nv-ruler__track" data-ruler></div></div>
+
+  <!-- Размытый фон из текущей работы -->
+  <div class="nv-bg" aria-hidden="true"><img data-bg-a alt=""><img data-bg-b alt=""></div>
+
+  <main class="nv-main" id="top">
+    <h1 class="visually-hidden">Нейровидео</h1>
+
+    <!-- Вид «слайдер»: одна работа на экран -->
+    <section class="nv-slider" data-slider aria-label="Работы"></section>
+
+    <!-- Вид «список» -->
+    <section class="nv-list" data-list aria-label="Список работ" hidden></section>
+
+    <!-- Финальный экран -->
+    <section class="nv-cta">
+      <p class="nv-cta__kicker">Нейровидео под ваш бренд</p>
+      <h2 class="nv-cta__title">Снимем без съёмочной группы</h2>
+      <p class="nv-cta__text">Мини-фильмы, рекламные ролики, мультсериалы и&nbsp;AI-персонажи: от&nbsp;идеи и&nbsp;сценария до&nbsp;готового видео.</p>
+      <button class="btn btn--red btn--big" type="button" data-open-popup>Обсудим проект?</button>
+    </section>
+  </main>
+
+  <!-- Нижняя панель: фильтр, вид (на телефоне), таймкод -->
+  <div class="nv-bar">
+    <div class="nv-filter" data-filter>
+      <button type="button" class="nv-filter__all is-active" data-cat="all"><i></i>Все <em data-count></em></button>
+      <div class="nv-filter__cats" data-cats></div>
+    </div>
+    <div class="nv-views nv-views--bottom" role="group" aria-label="Вид">
+      <button type="button" class="is-active" data-view="slider">слайдер</button><span>/</span><button type="button" data-view="list">список</button>
+    </div>
+    <span class="nv-timecode" data-timecode>00:00:00</span>
+  </div>
+
+  <!-- ============ ПЛЕЕР ============ -->
+  <div class="nv-player" id="player" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Просмотр работы">
+    <div class="nv-player__top">
+      <button type="button" class="nv-player__btn" data-player-close>← назад</button>
+      <button type="button" class="nv-player__btn" data-player-info>инфо</button>
+      <span class="nv-player__counter" data-player-counter>01 / 14</span>
+    </div>
+
+    <div class="nv-player__stage" data-player-stage>
+      <video class="nv-player__video" data-player-video playsinline preload="auto"></video>
+      <button type="button" class="nv-player__side nv-player__side--prev" data-player-prev>пред</button>
+      <button type="button" class="nv-player__side nv-player__side--next" data-player-next>след</button>
+      <div class="nv-player__loading" data-player-loading><span></span></div>
+    </div>
+
+    <div class="nv-player__bottom">
+      <div class="nv-player__meta">
+        <h2 class="nv-player__title" data-player-title></h2>
+        <p class="nv-player__kind" data-player-kind></p>
+      </div>
+      <div class="nv-player__parts" data-player-parts></div>
+      <div class="nv-player__timeline">
+        <span class="nv-player__time" data-player-time>00:00</span>
+        <div class="nv-player__progress" data-player-progress><i data-player-buffer></i><b data-player-fill></b></div>
+        <span class="nv-player__time" data-player-duration>00:00</span>
+      </div>
+      <div class="nv-player__controls">
+        <button type="button" class="nv-player__btn" data-player-mute>звук: вкл</button>
+        <button type="button" class="nv-player__btn nv-player__btn--mob" data-player-prev>← пред</button>
+        <button type="button" class="nv-player__btn" data-player-play>пауза</button>
+        <button type="button" class="nv-player__btn nv-player__btn--mob" data-player-next>след →</button>
+        <button type="button" class="nv-player__btn" data-player-fs>на весь экран</button>
+      </div>
+    </div>
+
+    <!-- Инфо о работе -->
+    <aside class="nv-info" data-info aria-hidden="true">
+      <div class="nv-info__top">
+        <span data-info-counter>1 / 14</span>
+        <button type="button" class="nv-player__btn" data-info-close>закрыть</button>
+      </div>
+      <p class="nv-info__cat" data-info-cat></p>
+      <h3 class="nv-info__title" data-info-title></h3>
+      <p class="nv-info__about" data-info-about></p>
+      <ul class="nv-info__facts" data-info-facts></ul>
+      <button class="btn nv-info__cta" type="button" data-open-popup data-service-from-player>Хочу похожее видео</button>
+    </aside>
+  </div>
+
+  <!-- ============ МЕНЮ (оверлей) ============ -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <img class="menu__flower" src="../assets/img/menu-flower.svg" alt="" aria-hidden="true">
+    <div class="menu__header">
+      <a class="logo" href="../" aria-label="Красный конь — на главную">
+        <img class="logo__horse" src="../assets/img/logo-horse.svg" alt="" width="52" height="51">
+        <img class="logo__word" src="../assets/img/logo-wordmark-white.svg" alt="Красный конь" width="223" height="41">
+      </a>
+      <nav class="header__nav">
+        <a class="header__phone header__phone--white" href="tel:+73537420020">+7(3537)42-00-20</a>
+        <button class="header__cta link-green" type="button" data-open-popup>обсудить проект</button>
+      </nav>
+      <button class="menu__close" type="button" aria-label="Закрыть меню" data-close-menu><img src="../assets/img/close-white.svg" alt="" width="44" height="44"></button>
+    </div>
+    <nav class="big-links big-links--menu">
+      <a class="big-link" href="../#projects"><span class="big-link__inner"><img src="../assets/img/triangle-red.svg" alt="" class="big-link__arrow">Проекты</span></a>
+      <a class="big-link is-current" href="./" aria-current="page" data-close-menu><span class="big-link__inner"><img src="../assets/img/triangle-red.svg" alt="" class="big-link__arrow">Нейровидео</span></a>
+      <a class="big-link" href="../#services"><span class="big-link__inner"><img src="../assets/img/triangle-red.svg" alt="" class="big-link__arrow">Услуги</span></a>
+      <a class="big-link" href="../#contacts"><span class="big-link__inner"><img src="../assets/img/triangle-red.svg" alt="" class="big-link__arrow">контакты</span></a>
+    </nav>
+    <div class="socials menu__socials">
+      <a href="#" aria-label="Telegram"><img src="../assets/img/tg.svg" alt="" width="61" height="52"></a>
+      <a href="#" aria-label="ВКонтакте"><img src="../assets/img/vk.svg" alt="" width="74" height="43"></a>
+    </div>
+    <p class="menu__copy">© 2011-2025 Digital интегратор WebCat<br> ИНН 5614087228, ООО ВЕБКАТ</p>
+  </div>
+
+  <!-- ============ ПОП-АП «Познакомимся?» ============ -->
+  <div class="popup" id="popup" aria-hidden="true">
+    <div class="popup__overlay" data-close-popup></div>
+    <div class="popup__card" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+      <div class="popup__view popup__view--form">
+        <div class="popup__head">
+          <h2 class="popup__title" id="popup-title" data-popup-title>Познакомимся?</h2>
+          <p class="popup__sub" data-popup-sub>Мы свяжемся с вами в течение<br><span>30 минут</span></p>
+        </div>
+        <button class="popup__close" type="button" aria-label="Закрыть" data-close-popup><img src="../assets/img/close-green.svg" alt="" width="32" height="32"></button>
+
+        <form class="popup__form" id="lead-form" novalidate>
+          <input type="hidden" name="service" value="">
+          <div class="popup__fields">
+            <label class="field"><input type="text" name="name" placeholder="От кого" autocomplete="name" required></label>
+            <label class="field"><input type="tel" name="phone" placeholder="Номер телефона" autocomplete="tel" required></label>
+            <label class="field"><input type="text" name="message" placeholder="Коротко опишите запрос"></label>
+          </div>
+          <button class="btn popup__submit" type="submit">отправить</button>
+        </form>
+
+        <div class="stamp" aria-hidden="true">
+          <img class="stamp__border" src="../assets/img/stamp-border.svg" alt="">
+          <span class="stamp__bg"></span>
+          <img class="stamp__clouds" src="../assets/img/stamp-clouds.svg" alt="">
+          <img class="stamp__horse" src="../assets/img/stamp-horse.svg" alt="">
+          <img class="stamp__word" src="../assets/img/stamp-wordmark.svg" alt="">
+        </div>
+      </div>
+      <div class="popup__view popup__view--done" aria-live="polite">
+        <img class="popup__flap" src="../assets/img/envelope-flap.svg" alt="">
+        <div class="popup__thanks">
+          <p class="popup__thanks-title">Спасибо за письмо!</p>
+          <p class="popup__thanks-text">Мы перезвоним вам в течение 30 минут</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/neurovideo-data.js"></script>
+  <script src="../js/neurovideo.js"></script>
+</body>
+</html>
