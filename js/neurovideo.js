@@ -7,7 +7,6 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const ORN = ['orn-flower-lined', 'orn-star', 'orn-flower-lined'];
-  const AR = { h: '16 / 9', v: '9 / 16', s: '4 / 3' };
   const videoUrl = f => base + 'video/' + f;
   const posterUrl = w => base + 'posters/' + w.poster;
   const pad = n => String(n).padStart(2, '0');
@@ -27,8 +26,8 @@
   works.forEach((w, i) => {
     const n = pad(i + 1);
     const cat = categories[w.cat];
-    const ar = AR[w.parts[0].orientation || w.orientation] || AR.h;
-    const arn = ar.split('/').reduce((x, y) => x / y);
+    const orient = w.parts[0].orientation || w.orientation || 'h';
+    const ar = { h: [16, 9], v: [9, 16], s: [4, 3] }[orient] || [16, 9]; // родные пропорции — для телефона
 
     const slide = document.createElement('article');
     slide.className = 'nv-slide';
@@ -41,7 +40,8 @@
         <span class="nv-slide__kind">${w.kind}</span>
       </div>
       <div class="nv-frame">
-        <div class="nv-frame__box" style="--ar:${ar};--arn:${arn.toFixed(4)}" role="button" tabindex="0" aria-label="Смотреть: ${w.title}">
+        <div class="nv-frame__box${orient === 'h' ? '' : ' is-fit'}" style="--ar:${ar[0]} / ${ar[1]};--arn:${(ar[0] / ar[1]).toFixed(4)}" role="button" tabindex="0" aria-label="Смотреть: ${w.title}">
+          ${orient === 'h' ? '' : `<img class="nv-frame__blur" src="${posterUrl(w)}" alt="" loading="lazy">`}
           <img src="${posterUrl(w)}" alt="" loading="${i < 2 ? 'eager' : 'lazy'}">
           <span class="nv-frame__corners" aria-hidden="true"></span>
           <span class="nv-play"><img src="../assets/img/play.svg" alt="">смотреть</span>
@@ -111,7 +111,7 @@
       v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
       v.src = videoUrl(w.parts[0].video);
       v.addEventListener('playing', () => v.classList.add('is-ready'));
-      box.insertBefore(v, box.children[1] || null);
+      box.insertBefore(v, $('.nv-frame__corners', box));
     }
     v.play().catch(() => {});
     return v;
@@ -175,34 +175,36 @@
   }
   $$('[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
 
-  /* ---------- Фильтр по категориям ---------- */
+  /* ---------- Фильтр по категориям: выпадающий список вверх ---------- */
   const filter = $('[data-filter]');
-  const allBtn = $('[data-cat="all"]', filter);
-  $('[data-count]', filter).textContent = `(${works.length})`;
-  $('[data-cats]', filter).innerHTML = Object.entries(categories)
-    .map(([id, name]) => `<button type="button" data-cat="${id}"><i></i>${name} <em>(${works.filter(w => w.cat === id).length})</em></button>`).join('');
+  const fToggle = $('[data-filter-toggle]', filter);
+  const fCats = $('[data-cats]', filter);
+  const countOf = id => (id === 'all' ? works.length : works.filter(w => w.cat === id).length);
+  const catName = id => (id === 'all' ? 'Все' : categories[id]);
+  fCats.innerHTML = ['all', ...Object.keys(categories)]
+    .map(id => `<button type="button" role="menuitemradio" data-cat="${id}"><i></i>${catName(id)} <em>(${countOf(id)})</em></button>`).join('');
   let currentCat = 'all';
   const visibleSlides = () => slides.filter(s => !s.hidden);
   const visibleIdx = () => works.map((w, i) => i).filter(i => currentCat === 'all' || works[i].cat === currentCat);
+  const setOpen = on => { filter.classList.toggle('is-open', on); fToggle.setAttribute('aria-expanded', String(on)); };
   function setCat(cat) {
     currentCat = cat;
-    $$('[data-cat]', filter).forEach(b => b.classList.toggle('is-active', b.dataset.cat === cat));
+    $$('[data-cat]', fCats).forEach(b => { const on = b.dataset.cat === cat; b.classList.toggle('is-active', on); b.setAttribute('aria-checked', String(on)); });
+    $('[data-filter-label]', filter).textContent = catName(cat);
+    $('[data-count]', filter).textContent = `(${countOf(cat)})`;
     works.forEach((w, i) => { const show = cat === 'all' || w.cat === cat; slides[i].hidden = !show; rows[i].hidden = !show; });
-    $('[data-count]', filter).textContent = `(${visibleIdx().length})`;
-    filter.classList.remove('is-open');
+    setOpen(false);
     if (activeSlide) stopPreview($('.nv-frame__box', activeSlide));
     activeSlide = null;
     window.scrollTo({ top: 0, behavior: 'instant' });
     if (!html.classList.contains('is-list')) requestAnimationFrame(() => activate(visibleSlides()[0] || null));
   }
-  filter.addEventListener('click', e => {
-    const b = e.target.closest('[data-cat]');
-    if (!b) return;
-    // на тач-экранах первое касание «Все» раскрывает список категорий
-    if (b === allBtn && !matchMedia('(hover: hover)').matches && !filter.classList.contains('is-open')) { filter.classList.add('is-open'); return; }
-    setCat(b.dataset.cat);
-  });
-  document.addEventListener('click', e => { if (!filter.contains(e.target)) filter.classList.remove('is-open'); });
+  fToggle.addEventListener('click', () => setOpen(!filter.classList.contains('is-open')));
+  fCats.addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (b) setCat(b.dataset.cat); });
+  document.addEventListener('click', e => { if (!filter.contains(e.target)) setOpen(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+  setCat('all');
+  html.classList.remove('nv-snap'); // setCat прокрутил наверх; привязка включится ниже
 
   /* ---------- Плеер ---------- */
   const player = $('#player');

@@ -64,8 +64,8 @@
   <!-- Нижняя панель: фильтр, вид (на телефоне), таймкод -->
   <div class="nv-bar">
     <div class="nv-filter" data-filter>
-      <button type="button" class="nv-filter__all is-active" data-cat="all"><i></i>Все <em data-count></em></button>
-      <div class="nv-filter__cats" data-cats></div>
+      <button type="button" class="nv-filter__toggle" data-filter-toggle aria-expanded="false" aria-haspopup="true"><i></i><span data-filter-label>Все</span> <em data-count></em></button>
+      <div class="nv-filter__cats" data-cats role="menu"></div>
     </div>
     <div class="nv-views nv-views--bottom" role="group" aria-label="Вид">
       <button type="button" class="is-active" data-view="slider">слайдер</button><span>/</span><button type="button" data-view="list">список</button>
