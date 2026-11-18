@@ -8,7 +8,9 @@
 
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* Слайдер — постраничный: страница не прокручивается, лента сдвигается трансформом */
+/* Компьютер: обычный скролл страницы с примагничиванием к проектам (включается из js после прокрутки наверх) */
+html.nv-page.nv-snap { scroll-snap-type: y proximity; }
+/* Сенсорные экраны: постраничный слайдер — страница не прокручивается, лента сдвигается трансформом */
 html.nv-paged, html.nv-paged body { height: 100%; overflow: hidden; overscroll-behavior: none; }
 html.nv-paged .nv-slider { position: fixed; inset: 0; z-index: 1; overflow: hidden; touch-action: none; }
 .nv-track { will-change: transform; }

@@ -87,7 +87,7 @@
   let rulerPos = 0; // позиция ленты слайдера (px) или прокрутка списка
   function moveRulers() {
     const step = parseFloat(getComputedStyle(html).fontSize) * 8; // высота деления 8rem
-    const pos = html.classList.contains('is-list') ? window.scrollY : rulerPos;
+    const pos = isPaged() ? rulerPos : window.scrollY;
     const off = -((pos * .35) % (step * 10));
     rulers.forEach((r, k) => { r.style.transform = `translateY(${k ? -off - step * 10 : off}px)`; });
   }
@@ -145,7 +145,16 @@
   const mainEl = $('.nv-main');
   let pages = [], page = 0, stageH = 0, animating = false, animTimer = null;
   const ANIM = 550;
-  const isPaged = () => !html.classList.contains('is-list');
+  // Постраничное листание — только на сенсорных экранах. С мышью/тачпадом — обычный скролл страницы с примагничиванием.
+  const touchMQ = matchMedia('(hover: none) and (pointer: coarse)');
+  const isPaged = () => !html.classList.contains('is-list') && touchMQ.matches;
+
+  // Скролл-режим (компьютер): активен тот проект, что занимает бóльшую часть экрана
+  const io = new IntersectionObserver(entries => {
+    if (isPaged() || html.classList.contains('is-list')) return;
+    entries.forEach(e => { if (e.isIntersecting && e.intersectionRatio >= .55) activate(e.target); });
+  }, { threshold: [.55] });
+  slides.forEach(sl => io.observe(sl));
   const modalOpen = () => player.classList.contains('is-open') || $('#popup').classList.contains('is-open') || $('#menu').classList.contains('is-open');
 
   function buildPages() { pages = [...slides.filter(sl => !sl.hidden), cta]; }
@@ -247,15 +256,21 @@
   function setView(view) {
     const isList = view === 'list';
     html.classList.toggle('is-list', isList);
-    html.classList.toggle('nv-paged', !isList);
+    html.classList.toggle('nv-paged', !isList && touchMQ.matches);
+    html.classList.remove('nv-snap');
     slider.hidden = isList;
     list.hidden = !isList;
     $$('[data-view]').forEach(b => b.classList.toggle('is-active', b.dataset.view === view));
     if (activeSlide) stopPreview($('.nv-frame__box', activeSlide));
     activeSlide = null;
-    if (isList) mainEl.appendChild(cta); else track.appendChild(cta); // финальный экран — последняя страница ленты
+    if (isPaged()) track.appendChild(cta); else mainEl.appendChild(cta); // в постраничном режиме финальный экран — последняя страница ленты
+    track.style.transform = '';
     window.scrollTo({ top: 0, behavior: 'instant' });
-    if (!isList) { buildPages(); measure(); goTo(0, { instant: true }); }
+    if (isPaged()) { buildPages(); measure(); goTo(0, { instant: true }); }
+    else if (!isList) {
+      activate(visibleSlides()[0] || null);
+      requestAnimationFrame(() => html.classList.add('nv-snap')); // привязку включаем после прокрутки наверх
+    }
     moveRulers();
     try { localStorage.setItem('nv-view', view); } catch (e) { /* ignore */ }
   }
@@ -284,6 +299,7 @@
     activeSlide = null;
     window.scrollTo({ top: 0, behavior: 'instant' });
     if (isPaged()) { buildPages(); goTo(0, { instant: true }); }
+    else if (!html.classList.contains('is-list')) activate(visibleSlides()[0] || null);
   }
   fToggle.addEventListener('click', () => setOpen(!filter.classList.contains('is-open')));
   fCats.addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (b) setCat(b.dataset.cat); });
@@ -381,8 +397,11 @@
     lockPage(false);
     history.replaceState(null, '', location.pathname + location.search);
     // вернуться к той же работе в слайдере/списке
-    if (isPaged()) { activeSlide = null; goTo(Math.max(0, pages.indexOf(slides[cur])), { instant: true }); }
-    else if (!rows[cur].hidden) rows[cur].scrollIntoView({ behavior: 'instant', block: 'center' });
+    if (activeSlide) activeSlide.classList.remove('is-active'); // чтобы превью перезапустилось, а метка не осталась на старом слайде
+    activeSlide = null;
+    if (isPaged()) goTo(Math.max(0, pages.indexOf(slides[cur])), { instant: true });
+    else if (html.classList.contains('is-list')) { if (!rows[cur].hidden) rows[cur].scrollIntoView({ behavior: 'instant', block: 'center' }); }
+    else { slides[cur].scrollIntoView({ behavior: 'instant', block: 'start' }); activate(slides[cur]); }
     if (lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
   }
 
@@ -461,6 +480,7 @@
   try { startView = localStorage.getItem('nv-view') || 'slider'; } catch (e) { /* ignore */ }
   setCat('all');
   setView(startView === 'list' ? 'list' : 'slider');
+  touchMQ.addEventListener('change', () => setView(html.classList.contains('is-list') ? 'list' : 'slider'));
   window.addEventListener('scroll', moveRulers, { passive: true });
   window.addEventListener('resize', moveRulers);
   setBg(works[0]);
