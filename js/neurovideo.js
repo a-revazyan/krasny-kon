@@ -84,9 +84,11 @@
   /* ---------- Линейки по краям: числа «кадров», едут со скроллом ---------- */
   const rulers = $$('[data-ruler]');
   rulers.forEach(r => { r.innerHTML = Array.from({ length: 60 }, (_, k) => `<span>${(k * 10 + 100) % 1000}</span>`).join(''); });
+  let rulerPos = 0; // позиция ленты слайдера (px) или прокрутка списка
   function moveRulers() {
     const step = parseFloat(getComputedStyle(html).fontSize) * 8; // высота деления 8rem
-    const off = -((window.scrollY * .35) % (step * 10));
+    const pos = html.classList.contains('is-list') ? window.scrollY : rulerPos;
+    const off = -((pos * .35) % (step * 10));
     rulers.forEach((r, k) => { r.style.transform = `translateY(${k ? -off - step * 10 : off}px)`; });
   }
 
@@ -130,10 +132,91 @@
     setBg(w);
     if (!player.classList.contains('is-open') && !html.classList.contains('is-list')) activeVideo = previewIn($('.nv-frame__box', slide), w);
   }
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting && e.intersectionRatio >= .55) activate(e.target); });
-  }, { threshold: [.55] });
-  slides.forEach(s => io.observe(s));
+
+  /* ---------- Постраничный слайдер: один жест = один проект ----------
+     Лента двигается трансформом, а не прокруткой страницы, поэтому не бывает
+     «пограничных» положений между проектами. Свайп ведёт ленту за пальцем,
+     после отпускания — доводка к следующему проекту или возврат. */
+  const track = document.createElement('div');
+  track.className = 'nv-track';
+  slides.forEach(sl => track.appendChild(sl));
+  slider.appendChild(track);
+  const cta = $('.nv-cta');
+  const mainEl = $('.nv-main');
+  let pages = [], page = 0, stageH = 0, animating = false, animTimer = null;
+  const ANIM = 550;
+  const isPaged = () => !html.classList.contains('is-list');
+  const modalOpen = () => player.classList.contains('is-open') || $('#popup').classList.contains('is-open') || $('#menu').classList.contains('is-open');
+
+  function buildPages() { pages = [...slides.filter(sl => !sl.hidden), cta]; }
+  function measure() {
+    stageH = slider.clientHeight || window.innerHeight;
+    slider.style.setProperty('--stage-h', stageH + 'px');
+  }
+  function place(offsetPx, animate) {
+    track.classList.toggle('is-anim', !!animate);
+    rulerPos = -offsetPx;
+    track.style.transform = `translate3d(0, ${offsetPx}px, 0)`;
+    moveRulers();
+  }
+  function goTo(k, { instant = false } = {}) {
+    k = Math.max(0, Math.min(pages.length - 1, k));
+    const changed = k !== page;
+    page = k;
+    place(-page * stageH, !instant);
+    const pg = pages[page];
+    activate(pg === cta ? null : pg);
+    if (!instant && changed) {
+      animating = true;
+      clearTimeout(animTimer);
+      animTimer = setTimeout(() => { animating = false; }, ANIM);
+    }
+  }
+  const step = dir => { if (!animating) goTo(page + dir); };
+
+  // колесо и тачпад: один рывок = один проект; инерция тачпада не перелистывает дальше
+  let wheelLock = false, wheelTimer = null;
+  window.addEventListener('wheel', e => {
+    if (!isPaged() || modalOpen() || e.target.closest('.nv-filter__cats')) return;
+    e.preventDefault();
+    clearTimeout(wheelTimer);
+    wheelTimer = setTimeout(() => { wheelLock = false; }, 160);
+    if (wheelLock || Math.abs(e.deltaY) < 4) return;
+    wheelLock = true;
+    step(e.deltaY > 0 ? 1 : -1);
+  }, { passive: false });
+
+  // свайп: лента идёт за пальцем, короткий быстрый жест тоже засчитывается
+  let tY = 0, tT = 0, tDy = 0, touching = false;
+  slider.addEventListener('touchstart', e => {
+    if (!isPaged() || e.touches.length > 1) return;
+    touching = true; tY = e.touches[0].clientY; tT = performance.now(); tDy = 0;
+  }, { passive: true });
+  slider.addEventListener('touchmove', e => {
+    if (!touching) return;
+    e.preventDefault();
+    tDy = e.touches[0].clientY - tY;
+    const atEdge = (page === 0 && tDy > 0) || (page === pages.length - 1 && tDy < 0);
+    place(-page * stageH + (atEdge ? tDy * .3 : tDy), false); // у краёв — с сопротивлением
+  }, { passive: false });
+  const touchEnd = () => {
+    if (!touching) return;
+    touching = false;
+    const quick = performance.now() - tT < 250; // короткий быстрый «смахивающий» жест
+    if (Math.abs(tDy) > 40 || (Math.abs(tDy) > 15 && quick)) goTo(page + (tDy < 0 ? 1 : -1));
+    else goTo(page); // вернуть на место
+  };
+  slider.addEventListener('touchend', touchEnd);
+  slider.addEventListener('touchcancel', touchEnd);
+
+  document.addEventListener('keydown', e => {
+    if (!isPaged() || modalOpen() || e.target.closest('input, textarea')) return;
+    if (['ArrowDown', 'PageDown'].includes(e.key) || (e.key === ' ' && !e.target.closest('button, [role=button]'))) { e.preventDefault(); step(1); }
+    else if (['ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); step(-1); }
+    else if (e.key === 'Home') goTo(0);
+    else if (e.key === 'End') goTo(pages.length - 1);
+  });
+  window.addEventListener('resize', () => { if (isPaged()) { measure(); goTo(page, { instant: true }); } });
 
   slides.forEach(s => {
     const box = $('.nv-frame__box', s);
@@ -164,13 +247,16 @@
   function setView(view) {
     const isList = view === 'list';
     html.classList.toggle('is-list', isList);
+    html.classList.toggle('nv-paged', !isList);
     slider.hidden = isList;
     list.hidden = !isList;
     $$('[data-view]').forEach(b => b.classList.toggle('is-active', b.dataset.view === view));
     if (activeSlide) stopPreview($('.nv-frame__box', activeSlide));
     activeSlide = null;
+    if (isList) mainEl.appendChild(cta); else track.appendChild(cta); // финальный экран — последняя страница ленты
     window.scrollTo({ top: 0, behavior: 'instant' });
-    if (!isList) requestAnimationFrame(() => activate(visibleSlides()[0] || null));
+    if (!isList) { buildPages(); measure(); goTo(0, { instant: true }); }
+    moveRulers();
     try { localStorage.setItem('nv-view', view); } catch (e) { /* ignore */ }
   }
   $$('[data-view]').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
@@ -197,14 +283,12 @@
     if (activeSlide) stopPreview($('.nv-frame__box', activeSlide));
     activeSlide = null;
     window.scrollTo({ top: 0, behavior: 'instant' });
-    if (!html.classList.contains('is-list')) requestAnimationFrame(() => activate(visibleSlides()[0] || null));
+    if (isPaged()) { buildPages(); goTo(0, { instant: true }); }
   }
   fToggle.addEventListener('click', () => setOpen(!filter.classList.contains('is-open')));
   fCats.addEventListener('click', e => { const b = e.target.closest('[data-cat]'); if (b) setCat(b.dataset.cat); });
   document.addEventListener('click', e => { if (!filter.contains(e.target)) setOpen(false); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
-  setCat('all');
-  html.classList.remove('nv-snap'); // setCat прокрутил наверх; привязка включится ниже
 
   /* ---------- Плеер ---------- */
   const player = $('#player');
@@ -297,9 +381,8 @@
     lockPage(false);
     history.replaceState(null, '', location.pathname + location.search);
     // вернуться к той же работе в слайдере/списке
-    const target = html.classList.contains('is-list') ? rows[cur] : slides[cur];
-    if (target && !target.hidden) target.scrollIntoView({ behavior: 'instant', block: html.classList.contains('is-list') ? 'center' : 'start' });
-    if (!html.classList.contains('is-list')) { activeSlide = null; activate(slides[cur]); }
+    if (isPaged()) { activeSlide = null; goTo(Math.max(0, pages.indexOf(slides[cur])), { instant: true }); }
+    else if (!rows[cur].hidden) rows[cur].scrollIntoView({ behavior: 'instant', block: 'center' });
     if (lastFocus && document.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
   }
 
@@ -376,13 +459,11 @@
   /* ---------- Старт ---------- */
   let startView = 'slider';
   try { startView = localStorage.getItem('nv-view') || 'slider'; } catch (e) { /* ignore */ }
-  if (startView === 'list') setView('list');
+  setCat('all');
+  setView(startView === 'list' ? 'list' : 'slider');
   window.addEventListener('scroll', moveRulers, { passive: true });
   window.addEventListener('resize', moveRulers);
-  moveRulers();
   setBg(works[0]);
-  window.scrollTo(0, 0);
-  requestAnimationFrame(() => html.classList.add('nv-snap'));
 
   // ссылка вида /neurovideo/#son-raskolnikova открывает работу сразу (без звука — браузеры его блокируют без клика)
   const fromHash = works.findIndex(w => '#' + w.slug === location.hash);

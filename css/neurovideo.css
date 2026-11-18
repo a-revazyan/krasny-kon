@@ -8,16 +8,19 @@
 
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-/* привязка прокрутки включается из js после отрисовки слайдов, иначе браузер «прилипает» к последнему экрану */
-html.nv-page.nv-snap { scroll-snap-type: y proximity; }
-html.nv-page.is-list { scroll-snap-type: none; }
-:root { --nv-bg: #0e0e0e; --nv-pad: 4rem; }
+/* Слайдер — постраничный: страница не прокручивается, лента сдвигается трансформом */
+html.nv-paged, html.nv-paged body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+html.nv-paged .nv-slider { position: fixed; inset: 0; z-index: 1; overflow: hidden; touch-action: none; }
+.nv-track { will-change: transform; }
+.nv-track.is-anim { transition: transform .55s cubic-bezier(.2, .8, .25, 1); }
+html.nv-paged .nv-slide, html.nv-paged .nv-cta { height: var(--stage-h, 100vh); min-height: 0; }
+:root { --nv-bg: var(--burgundy); --nv-pad: 4rem; }
 body.nv { background: var(--nv-bg); color: var(--beige); }
 .nv main { padding-top: 0; }
 
 /* Шапка на тёмном фоне */
 .header--dark { background: transparent; }
-.header--dark::before { content: ""; position: absolute; inset: 0 0 -3rem; z-index: -1; background: linear-gradient(var(--nv-bg) 55%, rgba(14, 14, 14, 0)); pointer-events: none; }
+.header--dark::before { content: ""; position: absolute; inset: 0 0 -3rem; z-index: -1; background: linear-gradient(var(--nv-bg) 55%, rgba(35, 0, 2, 0)); pointer-events: none; }
 .nv-views { display: flex; align-items: center; gap: .8rem; font-family: "Monoid", monospace; font-weight: 700; font-size: 1.8rem; text-transform: uppercase; color: rgba(255, 252, 235, .35); }
 .nv-views button { color: inherit; text-transform: uppercase; transition: color .2s; }
 .nv-views button:hover { color: var(--beige); }
@@ -53,8 +56,8 @@ body:not(.is-loading) .nv-intro__word--r { transform: translateX(120%); }
 /* ---------- Размытый фон ---------- */
 .nv-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
 .nv-bg img { position: absolute; inset: -10%; width: 120%; height: 120%; object-fit: cover; filter: blur(4rem) saturate(1.1); opacity: 0; transition: opacity .9s ease; }
-.nv-bg img.is-on { opacity: .22; }
-.nv-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(14, 14, 14, .25), rgba(14, 14, 14, .9) 75%); }
+.nv-bg img.is-on { opacity: .32; }
+.nv-bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(35, 0, 2, .2), rgba(35, 0, 2, .85) 75%); }
 
 .nv-main { position: relative; z-index: 1; }
 
@@ -173,7 +176,7 @@ body:not(.is-loading) .nv-intro__word--r { transform: translateX(120%); }
   pointer-events: none;
 }
 .nv-bar > * { pointer-events: auto; }
-.nv-bar::before { content: ""; position: absolute; inset: -4rem 0 0; z-index: -1; background: linear-gradient(rgba(14, 14, 14, 0), rgba(14, 14, 14, .92)); pointer-events: none; }
+.nv-bar::before { content: ""; position: absolute; inset: -4rem 0 0; z-index: -1; background: linear-gradient(rgba(35, 0, 2, 0), rgba(35, 0, 2, .9)); pointer-events: none; }
 .nv-filter { position: relative; }
 .nv-filter button { display: inline-flex; align-items: center; gap: .8rem; color: rgba(255, 252, 235, .5); text-transform: uppercase; transition: color .2s; white-space: nowrap; }
 .nv-filter button:hover, .nv-filter button.is-active { color: var(--beige); }
@@ -186,7 +189,7 @@ body:not(.is-loading) .nv-intro__word--r { transform: translateX(120%); }
 .nv-filter__cats {
   position: absolute; left: -1.6rem; bottom: calc(100% + 1.6rem);
   display: flex; flex-direction: column; min-width: 28rem; padding: .8rem 1.6rem;
-  background: #161616; border: 1px solid rgba(255, 252, 235, .15);
+  background: #2e0a0c; border: 1px solid rgba(255, 252, 235, .15);
   opacity: 0; visibility: hidden; transform: translateY(1rem);
   transition: opacity .25s ease, transform .35s var(--gentle), visibility 0s linear .35s;
 }
@@ -200,7 +203,7 @@ body:not(.is-loading) .nv-intro__word--r { transform: translateX(120%); }
 .nv-player {
   position: fixed; inset: 0; z-index: 120;
   display: grid; grid-template-rows: auto minmax(0, 1fr) auto; grid-template-columns: minmax(0, 1fr);
-  background: #070707; color: var(--beige); overflow: hidden;
+  background: #160001; color: var(--beige); overflow: hidden;
   opacity: 0; visibility: hidden; transition: opacity .4s ease, visibility 0s linear .4s;
 }
 .nv-player.is-open { opacity: 1; visibility: visible; transition: opacity .4s ease; }
@@ -367,3 +370,6 @@ body.nv.is-locked { overflow: hidden; }
   .nv-row__title { transform: none; }
   .nv-row__title img { display: none; }
 }
+
+/* В постраничном режиме следующий проект виден уже во время свайпа — без «пустого» экрана */
+html.nv-paged .nv-slide__title, html.nv-paged .nv-frame__box { opacity: 1; transform: none; }
