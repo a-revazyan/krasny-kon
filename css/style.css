@@ -95,21 +95,11 @@ ul, ol { padding: 0; list-style: none; }
 }
 .link-green:hover { color: var(--green-hover); }
 
-/* ---------- Noise overlay ---------- */
+/* ---------- Noise overlay (static subtle Figma grain texture) ---------- */
 .noise {
-  position: fixed; left: -50%; top: -50%; width: 200%; height: 200%;
+  position: fixed; inset: 0;
   pointer-events: none; z-index: 300;
   background-repeat: repeat;
-  animation: grain 1s steps(6) infinite;
-}
-@keyframes grain {
-  0%   { transform: translate(0, 0); }
-  17%  { transform: translate(-3%, 2%); }
-  33%  { transform: translate(2%, -4%); }
-  50%  { transform: translate(-4%, -2%); }
-  67%  { transform: translate(3%, 3%); }
-  83%  { transform: translate(-2%, 4%); }
-  100% { transform: translate(0, 0); }
 }
 
 /* =========================================================
