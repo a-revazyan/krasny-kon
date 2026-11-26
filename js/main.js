@@ -17,18 +17,6 @@
     });
   });
 
-  /* ---------- 1b. Future cases catalog route (P1) — prevents 404 on preview ---------- */
-  $$('[data-future-route="projects"]').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const status = $('[data-future-status="projects"]');
-      if (status) {
-        status.textContent = 'Страница каталога кейсов запланирована на следующий этап (P1) — сейчас здесь настроен маршрут projects/.';
-        status.hidden = false;
-      }
-    });
-  });
-
   /* ---------- 2. Interactive Bottles Shelf («Для кого работаем — Пищевая промышленность») ---------- */
   (function initShelf() {
     const shelf = $('[data-shelf]');

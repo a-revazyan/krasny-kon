@@ -572,15 +572,49 @@ body[data-ai-enabled="true"] .page-assistant:not([hidden]) {
 }
 
 .project-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: rgba(255, 252, 235, .04);
   border: 1px solid var(--border-dark);
-  transition: border-color .2s ease-out, background-color .2s ease-out;
+  transition: border-color .2s ease-out, background-color .2s ease-out, transform .2s ease-out;
 }
 .project-card:hover {
   border-color: var(--light-green);
   background: rgba(255, 252, 235, .07);
+}
+.project-card--clickable {
+  cursor: pointer;
+}
+.project-card--clickable:hover {
+  transform: translateY(-.2rem);
+}
+.project-card--clickable:focus-within {
+  outline: .2rem solid var(--red);
+  outline-offset: .3rem;
+}
+.project-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: "Monoid", monospace;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  color: var(--light-green);
+  transition: color .2s ease-out;
+}
+.project-card__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.project-card__link:focus-visible {
+  outline: none;
+}
+.project-card--clickable:hover .project-card__link {
+  color: var(--beige);
 }
 
 .project-card__media {
