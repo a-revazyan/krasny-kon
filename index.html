@@ -1,478 +1,958 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="home-page">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Красный конь — студия дизайна</title>
-  <meta name="description" content="Красный конь — студия дизайна. Брендинг, веб-дизайн, UI/UX, дизайн упаковки и дизайн-подписка.">
+  <meta name="description" content="Красный конь — студия дизайна. Брендинг, дизайн упаковки, веб-дизайн, UI/UX и дизайн-подписка для бизнеса.">
   <link rel="preload" href="assets/fonts/Monoid-Bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/Golos-UI_Regular.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/home.css?v=3">
 </head>
-<body class="is-intro">
+<body class="home" data-page-id="home" data-ai-enabled="false">
 
-  <!-- Шум поверх всего макета (в Figma — эффект Noise на заливках) -->
+  <a class="skip-link" href="#main-content">Перейти к основному содержанию</a>
+
+  <!-- Фирменная фактура шума (статичная для производительности) -->
   <div class="noise" aria-hidden="true"></div>
 
-  <!-- ============ HEADER ============ -->
-  <header class="header" id="header">
-    <a class="logo" href="#top" aria-label="Красный конь — на главную">
+  <!-- ============ HEADER (на всю ширину 12-колоночной оболочки) ============ -->
+  <header class="header home-header" id="header" data-static data-section-id="header">
+    <a class="logo" href="#hero" aria-label="Красный конь — на главную">
       <img class="logo__horse" src="assets/img/logo-horse.svg" alt="" width="52" height="51">
       <img class="logo__word" src="assets/img/logo-wordmark.svg" alt="Красный конь" width="223" height="41">
     </a>
-    <nav class="header__nav">
-      <a class="header__phone" href="tel:+73537420020">+7(3537)42-00-20</a>
-      <button class="header__cta link-green" type="button" data-open-popup>обсудить проект</button>
+
+    <nav class="home-header__links" aria-label="Основная навигация">
+      <a class="home-header__link" href="projects/">Проекты</a>
+      <a class="home-header__link" href="#services">Услуги</a>
+      <a class="home-header__link" href="#subscription">Подписка</a>
+      <a class="home-header__link" href="#process">Процесс</a>
+      <a class="home-header__link home-header__link--accent" href="neurovideo/">Нейровидео</a>
+      <a class="home-header__link" href="#contacts">Контакты</a>
     </nav>
-    <button class="burger" type="button" aria-label="Открыть меню" data-open-menu>
-      <span></span><span></span><span></span>
-    </button>
+
+    <div class="home-header__actions">
+      <a class="home-header__phone" href="tel:+73537420020">+7 (3537) 42-00-20</a>
+      <button class="btn btn--red home-header__cta" type="button" data-open-popup>Обсудить проект</button>
+      <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="menu" data-open-menu>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
-  <main id="top">
+  <!-- ============ 12-КОЛОНОЧНАЯ ОБОЛОЧКА СТРАНИЦЫ ============ -->
+  <div class="page-shell" data-page-shell>
 
-    <!-- ============ 1. ПЕРВЫЙ ЭКРАН ============ -->
-    <section class="hero" id="hero" data-step="0">
-      <div class="hero__intro" aria-hidden="false">
-        <p class="hero__word hero__word--1">Студия</p>
-        <p class="hero__word hero__word--2">дизайна</p>
-        <p class="hero__tagline">Красота без результата –<br>просто декорация. Мы делаем<br>креатив, который двигает<br>бизнес вперёд.</p>
-        <div class="hero__orn" aria-hidden="true"><img src="assets/img/orn-flower-lined.svg" alt=""><img src="assets/img/orn-star.svg" alt=""><img src="assets/img/orn-flower-lined.svg" alt=""></div>
-      </div>
+    <!-- ОСНОВНОЙ КОНТЕНТ (12 колонок без ИИ; 9+3 на >=1360px и 8+4 на 1024-1359px при включённом ИИ) -->
+    <main class="page-main" id="main-content" data-main-content>
 
-      <button class="hero__play" type="button" aria-label="Смотреть: что мы делаем" data-hero-play>
-        <img src="assets/img/play.svg" alt="" width="62" height="62">
-      </button>
+      <!-- ============ 1. ПЕРВЫЙ ЭКРАН (статичный, без блокировки скролла) ============ -->
+      <section class="h-section h-hero" id="hero" data-section-id="hero" data-section-title="Первый экран">
+        <div class="h-wrap">
+          <div class="h-hero__top">
+            <div class="h-hero__headline">
+              <div class="h-kicker">
+                <span class="h-ornament" aria-hidden="true">
+                  <img src="assets/img/orn-flower-lined.svg" alt="" width="22" height="22">
+                  <img src="assets/img/orn-star.svg" alt="" width="22" height="22">
+                  <img src="assets/img/orn-flower-lined.svg" alt="" width="22" height="22">
+                </span>
+                <span>Студия дизайна</span>
+              </div>
+              <h1 class="h-hero__h1">Создаём бренды.<br>Помогаем&nbsp;им развиваться</h1>
+            </div>
 
-      <div class="hero__cards">
-        <!-- порядок слоёв как в Figma: «дизайн» снизу, «брендинг» сверху -->
-        <article class="hero-card hero-card--3">
-          <h2 class="hero-card__title">Дизайн-подписка</h2>
-          <div class="hero-card__media"><img src="assets/img/horse-subscription.webp" alt="Красный конь в ромбик" loading="eager"></div>
-          <div class="hero-card__text">
-            <p class="hero-card__lead">Закройте все задачи по маркетингу без проблем</p>
-            <p class="hero-card__desc">Ваша выделенная команда на месяц. Креативы для рекламы, презентации, посты для соцсетей</p>
-          </div>
-        </article>
-        <article class="hero-card hero-card--2">
-          <h2 class="hero-card__title">Web UX/UI</h2>
-          <div class="hero-card__media"><img src="assets/img/horse-web.webp" alt="Конь из стрелок-курсоров" loading="eager"></div>
-          <div class="hero-card__text">
-            <p class="hero-card__lead">Превращайте посетителей сайта в клиентов</p>
-            <p class="hero-card__desc">Проектируем удобные и конверсионные интерфейсы. Лендинги, корпоративные сайты, сервисы</p>
-          </div>
-        </article>
-        <article class="hero-card hero-card--1">
-          <h2 class="hero-card__title">Брендинг</h2>
-          <div class="hero-card__media hero-card__media--branding"><img src="assets/img/horse-branding.webp" alt="Конь из фольги" loading="eager"></div>
-          <div class="hero-card__text">
-            <p class="hero-card__lead">Сделайте ваш продукт дорогим <br>и узнаваемым <span class="nowrap">с первого взгляда</span></p>
-            <p class="hero-card__desc">Создаем сильные бренды, которые замечают <br>и запоминают. Логотипы, айдентика, упаковка.</p>
-          </div>
-        </article>
-      </div>
-
-      <!-- планшет и телефон: подсказка горизонтальной прокрутки карточек -->
-      <div class="hero__scrollbar" aria-hidden="true"><span class="hero__dash"></span><span class="hero__arrow"></span></div>
-
-      <button class="btn btn--arrow hero__btn hero__btn--1" type="button" data-hero-next>Далее<img src="assets/img/arrow-white.svg" alt="" width="11" height="20"></button>
-      <button class="btn btn--arrow hero__btn hero__btn--2" type="button" data-hero-next>что еще?<img src="assets/img/arrow-white.svg" alt="" width="11" height="20"></button>
-      <button class="btn btn--red hero__btn hero__btn--3" type="button" data-open-popup>Обсудим?</button>
-    </section>
-
-    <!-- ============ 2. ТЁМНЫЙ БЛОК: слоган, проекты, экспресс-продукты ============ -->
-    <div class="dark">
-
-      <!-- «кирпичики со словами» -->
-      <div class="bricks" aria-label="Ваш бренд заметят и точно запомнят">
-        <span class="bricks__line bricks__line--h"></span>
-        <span class="bricks__line bricks__line--v1"></span>
-        <span class="bricks__line bricks__line--v2"></span>
-        <span class="bricks__line bricks__line--v3"></span>
-        <span class="bricks__line bricks__line--v4"></span>
-        <span class="bricks__word bricks__word--vash">ваш</span>
-        <span class="bricks__word bricks__word--brand">бренд</span>
-        <img class="bricks__hand bricks__hand--zametyat" src="assets/img/word-zametyat.svg" alt="заметят">
-        <span class="bricks__word bricks__word--i">и</span>
-        <img class="bricks__hand bricks__hand--tochno" src="assets/img/word-tochno.svg" alt="точно">
-        <span class="bricks__word bricks__word--zapomnyat">запомнят</span>
-      </div>
-
-      <!-- «Наши проекты» — анимированный куб -->
-      <section class="projects" id="projects">
-        <div class="projects__marquee" aria-hidden="true">
-          <div class="projects__marquee-line projects__marquee-line--1"><span>НАШИПРОЕКТЫНАШИПРОЕКТЫ</span><span>НАШИПРОЕКТЫНАШИПРОЕКТЫ</span></div>
-          <div class="projects__marquee-line projects__marquee-line--2"><span>НАШИПРОЕКТЫНАШИПРОЕКТЫ</span><span>НАШИПРОЕКТЫНАШИПРОЕКТЫ</span></div>
-        </div>
-
-        <div class="projects__row">
-          <div class="cube-scene" data-cube tabindex="0" aria-roledescription="карусель" aria-label="Наши проекты: перетащите куб или используйте стрелки">
-            <div class="cube">
-              <!-- порядок граней = порядок проектов при повороте: front → left → back → right -->
-              <div class="cube__face cube__face--front"><img src="assets/img/project-spas.webp" alt="Яблочный спас" draggable="false"></div>
-              <div class="cube__face cube__face--left"><img src="assets/img/project-cel.webp" alt="Цель" draggable="false"></div>
-              <div class="cube__face cube__face--back"><img src="assets/img/project-zhel.webp" alt="Желен" draggable="false"></div>
-              <div class="cube__face cube__face--right"><img src="assets/img/project-maslo.webp" alt="Очень молочен" draggable="false"></div>
+            <div class="h-hero__side">
+              <p class="h-hero__lead">
+                Брендинг, дизайн упаковки, веб-дизайн и&nbsp;дизайн-подписка для компаний, которым нужен сильный и&nbsp;работающий визуал — на&nbsp;полке, на&nbsp;улице и&nbsp;в&nbsp;сети.
+              </p>
+              <div class="h-hero__actions">
+                <button class="btn btn--red" type="button" data-open-popup>Обсудить проект</button>
+                <a class="btn btn--outline" href="#projects">Смотреть проекты</a>
+              </div>
             </div>
           </div>
 
-          <div class="projects__info" aria-live="polite">
-            <h3 class="projects__title" data-project-title>Яблочный спас</h3>
-            <p class="projects__desc" data-project-desc>Бренд „Яблочный спас“ пришел к нам на этапе запуска – без фирменного стиля, стратегии и четкого ТЗ. Мы взяли на себя роль креаторов: полностью разработали визуальную концепцию, подобрали фирменные цвета и заложили фундамент бренда. На протяжении всего проекта мы работали в формате полного доверия: сами генерировали идеи и предлагали решения, которые вывели магазин на рынок</p>
-            <a class="link-green projects__more" href="#" data-project-link>подробнее</a>
+          <div class="h-hero__pillars" aria-label="Ключевые направления">
+            <article class="pillar-card" data-service-id="branding">
+              <div class="pillar-card__head">
+                <h2 class="pillar-card__title">Брендинг</h2>
+                <span class="pillar-card__num" aria-hidden="true">01</span>
+              </div>
+              <p class="pillar-card__lead">Сделайте продукт узнаваемым с&nbsp;первого взгляда</p>
+              <p class="pillar-card__desc">Создаём сильные бренды, которые замечают и&nbsp;запоминают: логотипы, айдентика и&nbsp;продающая упаковка.</p>
+            </article>
+
+            <article class="pillar-card" data-service-id="web-design">
+              <div class="pillar-card__head">
+                <h2 class="pillar-card__title">Web UX/UI</h2>
+                <span class="pillar-card__num" aria-hidden="true">02</span>
+              </div>
+              <p class="pillar-card__lead">Превращайте посетителей сайта в&nbsp;клиентов</p>
+              <p class="pillar-card__desc">Проектируем ясные и&nbsp;удобные интерфейсы: лендинги, корпоративные сайты и&nbsp;цифровые сервисы.</p>
+            </article>
+
+            <article class="pillar-card" data-service-id="design-subscription">
+              <div class="pillar-card__head">
+                <h2 class="pillar-card__title">Дизайн-подписка</h2>
+                <span class="pillar-card__num" aria-hidden="true">03</span>
+              </div>
+              <p class="pillar-card__lead">Закройте регулярные задачи по&nbsp;маркетингу</p>
+              <p class="pillar-card__desc">Ваша выделенная дизайн-команда на&nbsp;месяц: новые вкусы упаковки, рекламные креативы, презентации и&nbsp;соцсети.</p>
+            </article>
           </div>
         </div>
-
-        <p class="projects__tags" data-project-tags>Айдентика, наружная реклама, SMM</p>
-        <a class="link-green projects__all" href="#">смотреть все проекты</a>
       </section>
 
-      <!-- «Экспресс-продукты» -->
-      <section class="express" id="express">
-        <h2 class="h2 express__title">Экспресс-продукты</h2>
-        <div class="offer-row" data-drag-scroll>
-          <article class="offer">
-            <div class="offer__top">
-              <img class="offer__icon" src="assets/img/icon-express-logo.svg" alt="" width="54" height="57">
-              <span class="offer__price">140 000 ₽</span>
-            </div>
-            <div class="offer__body">
-              <h3 class="offer__title">Логотип за 5 дней</h3>
-              <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-              <div class="result" data-result>
-                <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
-                <ul class="result__list">
-                  <li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li>
-                </ul>
+      <!-- ============ 2. СЛОГАН «КИРПИЧИКИ» ============ -->
+      <section class="h-section h-slogan" id="slogan" data-section-id="slogan" data-section-title="Слоган студии">
+        <div class="h-wrap">
+          <div class="h-bricks" aria-label="Ваш бренд заметят и точно запомнят">
+            <div class="h-bricks__row h-bricks__row--1">
+              <div class="h-bricks__cell"><span class="h-bricks__word">ваш</span></div>
+              <div class="h-bricks__cell"><span class="h-bricks__word">бренд</span></div>
+              <div class="h-bricks__cell">
+                <img class="h-bricks__hand" src="assets/img/word-zametyat.svg" alt="заметят" width="358" height="74" loading="lazy" decoding="async">
               </div>
             </div>
-            <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
-          </article>
-
-          <article class="offer">
-            <div class="offer__top">
-              <img class="offer__icon offer__icon--landing" src="assets/img/icon-express-landing.svg" alt="" width="33" height="33">
-              <span class="offer__price">210 000 ₽</span>
-            </div>
-            <div class="offer__body">
-              <h3 class="offer__title">лендинг 10-15 дней</h3>
-              <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-              <div class="result" data-result>
-                <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
-                <ul class="result__list">
-                  <li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li>
-                </ul>
+            <div class="h-bricks__row h-bricks__row--2">
+              <div class="h-bricks__cell"><span class="h-bricks__word">и</span></div>
+              <div class="h-bricks__cell">
+                <img class="h-bricks__hand" src="assets/img/word-tochno.svg" alt="точно" width="295" height="77" loading="lazy" decoding="async">
               </div>
+              <div class="h-bricks__cell"><span class="h-bricks__word">запомнят</span></div>
             </div>
-            <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
-          </article>
-
-          <article class="offer">
-            <div class="offer__top">
-              <img class="offer__icon" src="assets/img/icon-express-rebrand.svg" alt="" width="54" height="54">
-              <span class="offer__price">320 000 ₽</span>
-            </div>
-            <div class="offer__body">
-              <h3 class="offer__title">Ребрендинг 20 дней</h3>
-              <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-              <div class="result" data-result>
-                <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
-                <ul class="result__list">
-                  <li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li>
-                </ul>
-              </div>
-            </div>
-            <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
-          </article>
+          </div>
         </div>
       </section>
-    </div>
 
-    <!-- ============ 3. НАШИ УСЛУГИ ============ -->
-    <section class="services" id="services">
-      <div class="services__title-wrap"><h2 class="services__title">наши услуги</h2></div>
-
-      <div class="svc" data-svc>
-        <img class="svc__icon" src="assets/img/svc-branding.svg" alt="" width="90" height="92">
-        <div class="svc__main">
-          <h3 class="svc__name">Брендинг и айдентика</h3>
-          <p class="svc__desc">Мы понимаем, что сильный бренд не доказывает свою важность, а транслирует её через смыслы и визуал. Создаем глубокие системы идентификации, которые формируют доверие на подсознательном уровне. Мы помогаем вам стать тем самым естественным выбором для клиента, к которому тянет без лишних слов.</p>
-          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">Стоимость по запросу</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
-        </div>
-        <button class="svc__toggle" type="button" aria-expanded="false"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
-      </div>
-
-      <div class="svc is-open" data-svc>
-        <img class="svc__icon" src="assets/img/svc-web.svg" alt="" width="90" height="92">
-        <div class="svc__main">
-          <h3 class="svc__name">Веб-дизайн: от лендингов до сложных систем</h3>
-          <p class="svc__desc">Задачи бывают разными: от лаконичного лендинга до масштабных платформ со сложной архитектурой. Мы проектируем цифровую среду, где профессиональная логика встречается с эстетикой. Убираем всё лишнее, чтобы пользователь двигался к цели легко и интуитивно, положительно реагируя на процесс взаимодействия.</p>
-          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">от 120 000 ₽</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
-        </div>
-        <button class="svc__toggle" type="button" aria-expanded="true"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
-      </div>
-
-      <div class="svc" data-svc>
-        <img class="svc__icon" src="assets/img/svc-uiux.svg" alt="" width="90" height="92">
-        <div class="svc__main">
-          <h3 class="svc__name">UI/UX и мобильные приложения</h3>
-          <p class="svc__desc">Мы считаем, что главное в интерфейсе это дружелюбие и забота <br>о пользователе. Поэтому с радостью берем задачи по проектированию сложных сценариев, чтобы ваш продукт стал привычной и приятной частью жизни человека. Создаем дизайн, который влюбляет в себя через удобство, делая каждое касание простым и понятным.</p>
-          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">Стоимость по запросу</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
-        </div>
-        <button class="svc__toggle" type="button" aria-expanded="false"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
-      </div>
-
-      <div class="svc" data-svc>
-        <img class="svc__icon" src="assets/img/svc-creative.svg" alt="" width="90" height="92">
-        <div class="svc__main">
-          <h3 class="svc__name">авторский креатив и рекламные кампании</h3>
-          <p class="svc__desc">Здесь в работу вступает наша органическая генерация: собственными живыми умами придумываем нестандартные идеи для наружной рекламы, перформансов и диджитал-компаний. Мы разрабатываем визуальные стратегии для любых носителей – от билбордов до масштабных перформансов. Помогаем вашему сообщению найти отклик у аудитории, создавая образы, которые притягивают внимание и запоминаются сами собой.</p>
-          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">Стоимость по запросу</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
-        </div>
-        <button class="svc__toggle" type="button" aria-expanded="false"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
-      </div>
-
-      <div class="svc" data-svc>
-        <img class="svc__icon" src="assets/img/svc-support.svg" alt="" width="90" height="92">
-        <div class="svc__main">
-          <h3 class="svc__name">Дизайн-поддержка по подписке</h3>
-          <p class="svc__desc">Идеальное решение для тех, кому нужно постоянное развитие без найма штатного дизайнера. Вы платите фиксированную сумму в месяц и получаете личный «дизайн-отдел», который оперативно закрывает любые задачи: от рекламных баннеров до доработки интерфейса. Гибкий формат, который растет вместе с вашим бизнесом.</p>
-          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">Стоимость по запросу</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
-        </div>
-        <button class="svc__toggle" type="button" aria-expanded="false"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
-      </div>
-
-      <div class="svc" data-svc>
-        <img class="svc__icon" src="assets/img/svc-packaging.svg" alt="" width="90" height="92">
-        <div class="svc__main">
-          <h3 class="svc__name">Дизайн упаковки и мерча</h3>
-          <p class="svc__desc">Мы знаем, что упаковка – это физическое воплощение вашей заботы о клиенте. Создаем дизайн, который выделяет продукт на полке за счет характера, а не кричащих заголовков. Прорабатываем каждую деталь, чтобы первое касание с товаром оставляло приятное послевкусие и желание вернуться за приобретением.</p>
-          <div class="svc__extra"><div class="svc__actions"><span class="svc__price">Стоимость по запросу</span><button class="btn svc__write" type="button" data-open-popup><span class="lbl-d">написать</span><span class="lbl-t">заказать</span></button></div></div>
-        </div>
-        <button class="svc__toggle" type="button" aria-expanded="false"><span class="svc__more link-green">подробнее</span><img class="svc__close" src="assets/img/close-green.svg" alt="Свернуть" width="32" height="32"></button>
-      </div>
-    </section>
-
-    <!-- ============ 4. ДЛЯ КОГО РАБОТАЕМ ============ -->
-    <section class="who" id="who">
-      <h2 class="section-title who__title">для кого работаем</h2>
-
-      <div class="who__list">
-        <!-- Средний бизнес -->
-        <div class="who-block who-block--mid">
-          <div class="who-panel who-panel--boxes">
-            <div class="box" style="left:44.748rem; top:6.82rem"><img class="box__shadow" src="assets/img/box-shadow.svg" alt=""><div class="box__lift"><img class="box__body" src="assets/img/box.svg" alt=""><img class="box__lines" src="assets/img/box-lines-a.svg" alt=""><span class="box__flower"><img src="assets/img/box-flower.png" alt=""></span></div></div>
-            <div class="box" style="left:26.5rem; top:13.1rem"><img class="box__shadow" src="assets/img/box-shadow.svg" alt=""><div class="box__lift"><img class="box__body" src="assets/img/box.svg" alt=""><img class="box__lines" src="assets/img/box-lines-a.svg" alt=""><span class="box__flower"><img src="assets/img/box-flower.png" alt=""></span></div></div>
-            <div class="box" style="left:7.777rem; top:19.736rem"><img class="box__shadow" src="assets/img/box-shadow.svg" alt=""><div class="box__lift"><img class="box__body" src="assets/img/box.svg" alt=""><img class="box__lines" src="assets/img/box-lines-a.svg" alt=""><span class="box__flower"><img src="assets/img/box-flower.png" alt=""></span></div></div>
+      <!-- ============ 3. НАШИ ПРОЕКТЫ (регулярная сетка 2×2, без 3D-куба и bento) ============ -->
+      <section class="h-section h-section--dark h-projects" id="projects" data-section-id="projects" data-section-title="Наши проекты">
+        <div class="h-wrap">
+          <div class="h-head">
+            <div class="h-head__left">
+              <span class="h-kicker">Портфолио · Приоритетные кейсы</span>
+              <h2 class="h-title">Наши проекты</h2>
+            </div>
+            <p class="h-subtitle">
+              Разрабатываем фирменный стиль, упаковку и&nbsp;коммуникации для пищевых производств, ритейла и&nbsp;растущих компаний.
+            </p>
           </div>
-          <div class="who-text">
-            <h3 class="h2">Средний бизнес</h3>
-            <div class="who-text__bottom">
-              <p class="who-text__p">Разрабатываем дизайн-системы<br>для упаковки товаров различных<br>сфер бизнеса</p>
-              <div class="ornament"><img src="assets/img/orn-flower.svg" alt=""><img src="assets/img/orn-subtract.svg" alt=""><img src="assets/img/orn-flower.svg" alt=""></div>
+
+          <div class="h-projects__grid">
+            <article class="project-card project-card--clickable" data-project-id="olomolo">
+              <div class="project-card__media">
+                <img src="assets/img/project-olomolo.webp" alt="Упаковка молочных коктейлей Оломоло" width="590" height="430" loading="lazy" decoding="async">
+              </div>
+              <div class="project-card__body">
+                <p class="project-card__tags">Коммуникационный дизайн · Упаковка · Молочная продукция</p>
+                <h3 class="project-card__title">Оломоло</h3>
+                <p class="project-card__desc">
+                  Бренд Красногорского молочного комбината. Производит натуральные молочные продукты (молоко, кефир, творог, коктейли) с&nbsp;соблюдением ГОСТа и&nbsp;концепцией «молоко с&nbsp;паспортом» — QR-код на&nbsp;упаковке открывает информацию о&nbsp;производстве.
+                </p>
+                <div class="project-card__meta">
+                  <span>Пищевое производство</span>
+                  <a class="project-card__link" href="projects/olomolo/">Открыть кейс →</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card project-card--clickable" data-project-id="ochen-molochen">
+              <div class="project-card__media">
+                <img src="assets/img/project-maslo.webp" alt="Упаковка и айдентика бренда Очень молочен" width="1128" height="1130" loading="lazy" decoding="async">
+              </div>
+              <div class="project-card__body">
+                <p class="project-card__tags">Логотип · Фирменный стиль · Упаковка</p>
+                <h3 class="project-card__title">Очень молочен</h3>
+                <p class="project-card__desc">
+                  Разработали новый фирменный стиль, логотип и&nbsp;систему упаковки. Задача — создать современный и&nbsp;узнаваемый образ бренда, который выделяет продукцию на&nbsp;полке, подчёркивает натуральность и&nbsp;легко масштабируется на&nbsp;всю линейку.
+                </p>
+                <div class="project-card__meta">
+                  <span>Молочный завод</span>
+                  <a class="project-card__link" href="projects/ochen-molochen/">Открыть кейс →</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card project-card--clickable" data-project-id="zhelen">
+              <div class="project-card__media">
+                <img src="assets/img/project-zhel.webp" alt="Айдентика и реклама мясной гастрономии Желен" width="1106" height="1130" loading="lazy" decoding="async">
+              </div>
+              <div class="project-card__body">
+                <p class="project-card__tags">Айдентика · Фирменный стиль · Реклама</p>
+                <h3 class="project-card__title">Желен</h3>
+                <p class="project-card__desc">
+                  Мясоперерабатывающее предприятие «ЖеЛен» — семейная фабрика мясной гастрономии с&nbsp;ассортиментом более 170&nbsp;наименований. Выстроили тёплый визуальный образ, подчёркивающий ценность домашнего уюта и&nbsp;вкусных традиций.
+                </p>
+                <div class="project-card__meta">
+                  <span>Мясная гастрономия</span>
+                  <a class="project-card__link" href="projects/zhelen/">Открыть кейс →</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card project-card--clickable" data-project-id="yablochny-spas">
+              <div class="project-card__media">
+                <img src="assets/img/project-spas.webp" alt="Фирменный стиль и коммуникации Яблочный спас" width="1130" height="1130" loading="lazy" decoding="async">
+              </div>
+              <div class="project-card__body">
+                <p class="project-card__tags">Айдентика · Дизайн-подписка · Наружная реклама · SMM</p>
+                <h3 class="project-card__title">Яблочный спас</h3>
+                <p class="project-card__desc">
+                  Бренд пришёл к&nbsp;нам на&nbsp;этапе запуска — без фирменного стиля и&nbsp;чёткого ТЗ. Мы разработали визуальную концепцию с&nbsp;нуля и&nbsp;уже третий год сопровождаем развитие бренда по&nbsp;дизайн-подписке: от&nbsp;наружной рекламы до&nbsp;SMM.
+                </p>
+                <div class="project-card__meta">
+                  <span>Брендинг + подписка</span>
+                  <a class="project-card__link" href="projects/yablochny-spas/">Открыть кейс →</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="h-projects__more">
+            <a class="h-projects__all-link" href="projects/">
+              <span>Смотреть другие проекты</span>
+              <span class="h-projects__all-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="h-projects__foot">
+            <p class="h-projects__note">
+              Отдельное направление студии — <strong>Нейровидео</strong>: ролики, мини-фильмы и&nbsp;AI-персонажи для брендов без съёмочной группы.
+            </p>
+            <div class="h-projects__actions">
+              <a class="btn btn--outline-light" href="neurovideo/">Смотреть Нейровидео</a>
+              <button class="btn btn--red" type="button" data-open-popup data-service="Обсуждение проекта">Обсудить похожий проект</button>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Пищевая промышленность -->
-        <div class="who-block who-block--food">
-          <div class="who-panel who-panel--bottles">
-            <div class="shelf" data-shelf></div>
+      <!-- ============ 4. УСЛУГИ И ФОРМАТ СОТРУДНИЧЕСТВА ============ -->
+      <section class="h-section h-services" id="services" data-section-id="services" data-section-title="Наши услуги">
+        <div class="h-wrap">
+          <div class="h-head">
+            <div class="h-head__left">
+              <span class="h-kicker">Услуги и форматы работы</span>
+              <h2 class="h-title">Наши услуги</h2>
+            </div>
+            <p class="h-subtitle">
+              Работаем на&nbsp;обоих этапах жизненного цикла бренда: от&nbsp;запуска и&nbsp;упаковки до&nbsp;регулярной дизайн-поддержки и&nbsp;рекламных кампаний.
+            </p>
           </div>
-          <div class="who-text">
-            <h3 class="h2">пищевая промышленность</h3>
-            <div class="who-text__bottom">
-              <p class="who-text__p">Разрабатываем продающие<br>упаковки товаров</p>
-              <div class="ornament"><img src="assets/img/orn-flower.svg" alt=""><img class="orn-wide" src="assets/img/orn-x.svg" alt=""><img src="assets/img/orn-flower.svg" alt=""></div>
+
+          <div class="h-service-groups">
+            <!-- Группа 1: Создание бренда -->
+            <div class="svc-group">
+              <div class="svc-group__head">
+                <h3 class="svc-group__title">Создание бренда</h3>
+                <p class="svc-group__hint">Запуск с нуля, ребрендинг, упаковка и цифровые точки контакта</p>
+              </div>
+
+              <div class="svc-grid">
+                <article class="svc-card" data-service-card data-service-id="branding">
+                  <div class="svc-card__top">
+                    <img class="svc-card__icon" src="assets/img/svc-branding.svg" alt="" width="54" height="54" loading="lazy">
+                    <span class="svc-card__price">от 60 000 ₽</span>
+                  </div>
+                  <h4 class="svc-card__title" data-service-title>Брендинг и айдентика</h4>
+                  <p class="svc-card__desc">
+                    Создаём глубокие системы идентификации, которые транслируют ценность продукта через смыслы и&nbsp;визуал — от&nbsp;логотипа до&nbsp;брендбука.
+                  </p>
+                  <div class="svc-card__foot">
+                    <button class="svc-card__cta" type="button" data-open-popup>Обсудить задачу →</button>
+                  </div>
+                </article>
+
+                <article class="svc-card" data-service-card data-service-id="packaging">
+                  <div class="svc-card__top">
+                    <img class="svc-card__icon" src="assets/img/svc-packaging.svg" alt="" width="54" height="54" loading="lazy">
+                    <span class="svc-card__price">от 15 000 ₽ / поз.</span>
+                  </div>
+                  <h4 class="svc-card__title" data-service-title>Дизайн упаковки и мерча</h4>
+                  <p class="svc-card__desc">
+                    Упаковка, которая выделяет продукт на&nbsp;полке и&nbsp;в&nbsp;карточке маркетплейса. Учитываем требования к&nbsp;таре, маркировке, печати и&nbsp;работе с&nbsp;типографией.
+                  </p>
+                  <div class="svc-card__foot">
+                    <button class="svc-card__cta" type="button" data-open-popup>Обсудить задачу →</button>
+                  </div>
+                </article>
+
+                <article class="svc-card" data-service-card data-service-id="web-design">
+                  <div class="svc-card__top">
+                    <img class="svc-card__icon" src="assets/img/svc-web.svg" alt="" width="54" height="54" loading="lazy">
+                    <span class="svc-card__price">от 50 000 ₽</span>
+                  </div>
+                  <h4 class="svc-card__title" data-service-title>Веб-дизайн: от лендингов до систем</h4>
+                  <p class="svc-card__desc">
+                    Проектируем цифровую среду, где бизнес-логика встречается с&nbsp;эстетикой. Убираем лишнее, чтобы пользователь легко двигался к&nbsp;заявке.
+                  </p>
+                  <div class="svc-card__foot">
+                    <button class="svc-card__cta" type="button" data-open-popup>Обсудить задачу →</button>
+                  </div>
+                </article>
+
+                <article class="svc-card" data-service-card data-service-id="ui-ux">
+                  <div class="svc-card__top">
+                    <img class="svc-card__icon" src="assets/img/svc-uiux.svg" alt="" width="54" height="54" loading="lazy">
+                    <span class="svc-card__price">По запросу</span>
+                  </div>
+                  <h4 class="svc-card__title" data-service-title>UI/UX и мобильные приложения</h4>
+                  <p class="svc-card__desc">
+                    Берёмся за&nbsp;сложные пользовательские сценарии и&nbsp;дизайн-системы, делая каждое касание с&nbsp;цифровым продуктом понятным и&nbsp;удобным.
+                  </p>
+                  <div class="svc-card__foot">
+                    <button class="svc-card__cta" type="button" data-open-popup>Обсудить задачу →</button>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Группа 2: Развитие бренда -->
+            <div class="svc-group">
+              <div class="svc-group__head">
+                <h3 class="svc-group__title">Развитие бренда</h3>
+                <p class="svc-group__hint">Постоянная поддержка маркетинга, новые носители, реклама и видео</p>
+              </div>
+
+              <div class="svc-grid svc-grid--three">
+                <article class="svc-card" data-service-card data-service-id="design-subscription-service">
+                  <div class="svc-card__top">
+                    <img class="svc-card__icon" src="assets/img/svc-support.svg" alt="" width="54" height="54" loading="lazy">
+                    <span class="svc-card__price">от 58 000 ₽ / мес</span>
+                  </div>
+                  <h4 class="svc-card__title" data-service-title>Дизайн-поддержка по подписке</h4>
+                  <p class="svc-card__desc">
+                    Личный дизайн-отдел за&nbsp;фиксированную сумму в&nbsp;месяц без найма в&nbsp;штат: баннеры, новые SKU упаковки, презентации и&nbsp;доработка сайта.
+                  </p>
+                  <div class="svc-card__foot">
+                    <a class="svc-card__cta" href="#subscription">Смотреть тарифы ↓</a>
+                  </div>
+                </article>
+
+                <article class="svc-card" data-service-card data-service-id="creative">
+                  <div class="svc-card__top">
+                    <img class="svc-card__icon" src="assets/img/svc-creative.svg" alt="" width="54" height="54" loading="lazy">
+                    <span class="svc-card__price">По запросу</span>
+                  </div>
+                  <h4 class="svc-card__title" data-service-title>Авторский креатив и реклама</h4>
+                  <p class="svc-card__desc">
+                    Нестандартные визуальные идеи и&nbsp;кампании для наружной рекламы, диджитал-каналов и&nbsp;перформансов, которые запоминаются аудитории.
+                  </p>
+                  <div class="svc-card__foot">
+                    <button class="svc-card__cta" type="button" data-open-popup>Обсудить задачу →</button>
+                  </div>
+                </article>
+
+                <article class="svc-card svc-card--featured" data-service-card data-service-id="neurovideo">
+                  <div class="svc-card__top">
+                    <img class="svc-card__icon" src="assets/img/play.svg" alt="" width="48" height="48" loading="lazy">
+                    <span class="svc-card__price">Портфолио</span>
+                  </div>
+                  <h4 class="svc-card__title" data-service-title>Нейровидео</h4>
+                  <p class="svc-card__desc">
+                    Рекламные ролики, мини-фильмы, мультсериалы и&nbsp;AI-персонажи под ваш бренд: от&nbsp;идеи и&nbsp;сценария до&nbsp;готового видео без съёмочной группы.
+                  </p>
+                  <div class="svc-card__foot">
+                    <a class="svc-card__cta" href="neurovideo/">Смотреть 14 работ →</a>
+                  </div>
+                </article>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Малый бизнес -->
-        <div class="who-block who-block--small">
-          <div class="who-panel who-panel--grid">
-            <div class="ec-grid">
-              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
-              <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
-              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
-              <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
-              <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
-              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
-              <div class="ec ec--accent"><div class="ec__img"><img src="assets/img/ec-flower.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
-              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
-              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
-              <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
-              <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
-              <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt=""></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+      <!-- ============ 5. ДИЗАЙН-ПОДПИСКА (флагманский блок) ============ -->
+      <section class="h-section h-section--panel h-sub" id="subscription" data-section-id="subscription" data-section-title="Дизайн-подписка">
+        <div class="h-wrap">
+          <div class="h-head">
+            <div class="h-head__left">
+              <span class="h-kicker">Флагманский формат · Регулярная работа</span>
+              <h2 class="h-title">Дизайн-подписка</h2>
             </div>
+            <p class="h-subtitle">
+              Выделенная дизайн-команда в&nbsp;вашем ритме: прогнозируемый бюджет, быстрые сроки и&nbsp;единый визуальный стиль во&nbsp;всех каналах.
+            </p>
           </div>
-          <div class="who-text">
-            <h3 class="h2">малый бизнес</h3>
-            <div class="who-text__bottom">
-              <p class="who-text__p">Упакуем бизнес с нуля!<br>Сделаем вас заметнее<br>и привлекательнее</p>
-              <div class="ornament"><img src="assets/img/orn-flower.svg" alt=""><img src="assets/img/orn-cross.svg" alt=""><img src="assets/img/orn-flower.svg" alt=""></div>
+
+          <div class="h-sub__intro">
+            <div>
+              <p class="h-hero__lead">
+                Подходит компаниям с&nbsp;маркетологом без штатного дизайнера и&nbsp;производителям, которым регулярно нужны новые вкусы, сезонные версии упаковки и&nbsp;рекламные материалы.
+              </p>
+              <ul class="h-sub__bullets">
+                <li>Этикетки новых вкусов и&nbsp;сезонные SKU</li>
+                <li>Креативы для наружной и&nbsp;таргетированной рекламы</li>
+                <li>Оформление карточек маркетплейсов и&nbsp;соцсетей</li>
+                <li>Презентации, каталоги и&nbsp;поддержка сайта</li>
+              </ul>
+            </div>
+
+            <aside class="h-sub__proof" aria-label="Пример долгосрочной работы">
+              <span class="h-sub__proof-label">Проверено на практике</span>
+              <h3 class="h-sub__proof-title">«Яблочный спас» — 3-й год на подписке</h3>
+              <p class="h-sub__proof-text">
+                После запуска фирменного стиля клиент остался на&nbsp;ежемесячном сопровождении: мы закрываем всю наружную рекламу, акции, соцсети и&nbsp;новые носители бренда без потери темпа.
+              </p>
+            </aside>
+          </div>
+
+          <div class="h-sub__grid">
+            <article class="sub-card" data-offer-card>
+              <div class="sub-card__top">
+                <h3 class="sub-card__name" data-offer-title>Старт</h3>
+              </div>
+              <p class="sub-card__price">58 000 ₽ <span>/ мес</span></p>
+              <p class="sub-card__desc">Для регулярной маркетинговой поддержки малого и&nbsp;среднего бизнеса.</p>
+              <ul class="sub-card__list">
+                <li>До 6 креативов в месяц</li>
+                <li>Баннеры, соцсети, печатные носители</li>
+                <li>Адаптации существующих макетов</li>
+              </ul>
+              <button class="btn sub-card__btn" type="button" data-open-popup data-service="Дизайн-подписка: Старт (58 000 ₽/мес)">Обсудить тариф</button>
+            </article>
+
+            <article class="sub-card sub-card--popular" data-offer-card>
+              <div class="sub-card__top">
+                <h3 class="sub-card__name" data-offer-title>Стандарт</h3>
+                <span class="sub-card__badge">Выбор клиентов</span>
+              </div>
+              <p class="sub-card__price">68 000 ₽ <span>/ мес</span></p>
+              <p class="sub-card__desc">Оптимальный объём для растущих брендов и&nbsp;пищевых производств.</p>
+              <ul class="sub-card__list">
+                <li>До 8 креативов в месяц</li>
+                <li>Маркетинг, новые позиции упаковки и&nbsp;веб</li>
+                <li>Прямой диалог с&nbsp;типографией по&nbsp;макетам</li>
+              </ul>
+              <button class="btn btn--red sub-card__btn" type="button" data-open-popup data-service="Дизайн-подписка: Стандарт (68 000 ₽/мес)">Обсудить регулярные задачи</button>
+            </article>
+
+            <article class="sub-card" data-offer-card>
+              <div class="sub-card__top">
+                <h3 class="sub-card__name" data-offer-title>Про</h3>
+              </div>
+              <p class="sub-card__price">92 000 ₽ <span>/ мес</span></p>
+              <p class="sub-card__desc">Максимальный объём задач для активных рекламных кампаний и&nbsp;широких линеек.</p>
+              <ul class="sub-card__list">
+                <li>До 10 креативов в месяц</li>
+                <li>Упаковка, презентации и&nbsp;обслуживание сайта</li>
+                <li>Приоритетная очередь задач</li>
+              </ul>
+              <button class="btn sub-card__btn" type="button" data-open-popup data-service="Дизайн-подписка: Про (92 000 ₽/мес)">Обсудить тариф</button>
+            </article>
+          </div>
+
+          <p class="h-sub__disclaimer">
+            Объём крупных задач (новая упаковка с&nbsp;нуля, многостраничные разделы сайта) согласуется индивидуально на&nbsp;старте месяца.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ 6. ЭКСПРЕСС-ПРОДУКТЫ (актуальные входные цены из плана) ============ -->
+      <section class="h-section h-express" id="express" data-section-id="express" data-section-title="Экспресс-продукты">
+        <div class="h-wrap">
+          <div class="h-head">
+            <div class="h-head__left">
+              <span class="h-kicker">Быстрый старт · Входные продукты</span>
+              <h2 class="h-title">Экспресс-продукты</h2>
+            </div>
+            <p class="h-subtitle">
+              Понятный способ быстро закрыть конкретную задачу и&nbsp;познакомиться с&nbsp;подходом команды без долгого входа.
+            </p>
+          </div>
+
+          <div class="offer-grid">
+            <article class="offer" data-offer-card>
+              <div class="offer__top">
+                <img class="offer__icon" src="assets/img/icon-express-logo.svg" alt="" width="54" height="57" loading="lazy">
+                <span class="offer__price">от 50 000 ₽</span>
+              </div>
+              <div class="offer__body">
+                <span class="offer__meta">5–7 рабочих дней</span>
+                <h3 class="offer__title" data-offer-title>Логотип (экспресс)</h3>
+                <p class="offer__desc">
+                  Чистый и&nbsp;запоминающийся знак для быстрого запуска проекта, без затянутой стратегической фазы.
+                </p>
+                <div class="result" data-result>
+                  <button class="result__head" type="button" aria-expanded="false">Что входит в результат<span class="result__icon" aria-hidden="true"></span></button>
+                  <ul class="result__list">
+                    <li>2 проработанные концепции логотипа</li>
+                    <li>2 круга правок по выбранному варианту</li>
+                    <li>Векторные исходники и правила использования</li>
+                  </ul>
+                </div>
+              </div>
+              <button class="btn offer__btn" type="button" data-open-popup>Заказать</button>
+            </article>
+
+            <article class="offer" data-offer-card>
+              <div class="offer__top">
+                <img class="offer__icon" src="assets/img/svc-packaging.svg" alt="" width="54" height="54" loading="lazy">
+                <span class="offer__price">от 15 000 ₽ / поз.</span>
+              </div>
+              <div class="offer__body">
+                <span class="offer__meta">3–5 рабочих дней</span>
+                <h3 class="offer__title" data-offer-title>Упаковка: новая позиция</h3>
+                <p class="offer__desc">
+                  Новый вкус, объём или сезонная версия по&nbsp;вашему готовому дизайну. Также делаем аудит текущей упаковки перед редизайном.
+                </p>
+                <div class="result" data-result>
+                  <button class="result__head" type="button" aria-expanded="false">Что входит в результат<span class="result__icon" aria-hidden="true"></span></button>
+                  <ul class="result__list">
+                    <li>Адаптация макета под новую SKU или тару</li>
+                    <li>Проверка композиции, маркировки и шрифтов</li>
+                    <li>Файлы, полностью готовые к сдаче в типографию</li>
+                  </ul>
+                </div>
+              </div>
+              <button class="btn offer__btn" type="button" data-open-popup>Заказать</button>
+            </article>
+
+            <article class="offer" data-offer-card>
+              <div class="offer__top">
+                <img class="offer__icon" src="assets/img/icon-express-rebrand.svg" alt="" width="54" height="54" loading="lazy">
+                <span class="offer__price">от 60 000 ₽</span>
+              </div>
+              <div class="offer__body">
+                <span class="offer__meta">7–10 рабочих дней</span>
+                <h3 class="offer__title" data-offer-title>Фирменный стиль (экспресс)</h3>
+                <p class="offer__desc">
+                  Компактная система айдентики для малого бизнеса и&nbsp;новых продуктов, чтобы сразу выглядеть цельно на&nbsp;всех носителях.
+                </p>
+                <div class="result" data-result>
+                  <button class="result__head" type="button" aria-expanded="false">Что входит в результат<span class="result__icon" aria-hidden="true"></span></button>
+                  <ul class="result__list">
+                    <li>Цветовая палитра, шрифты и фирменные элементы</li>
+                    <li>Оформление 3–4 базовых носителей бренда</li>
+                    <li>Компактный бренд-гайд на 10–12 страниц</li>
+                  </ul>
+                </div>
+              </div>
+              <button class="btn offer__btn" type="button" data-open-popup>Заказать</button>
+            </article>
+
+            <article class="offer" data-offer-card>
+              <div class="offer__top">
+                <img class="offer__icon" src="assets/img/icon-express-landing.svg" alt="" width="33" height="33" loading="lazy">
+                <span class="offer__price">от 50 000 ₽</span>
+              </div>
+              <div class="offer__body">
+                <span class="offer__meta">5–10 рабочих дней</span>
+                <h3 class="offer__title" data-offer-title>Лендинг</h3>
+                <p class="offer__desc">
+                  Запуск продающей страницы под продукт, линейку или рекламную кампанию: экспресс-запуск от&nbsp;50&nbsp;000&nbsp;₽, на&nbsp;конструкторе от&nbsp;80&nbsp;000&nbsp;₽, самописный от&nbsp;160&nbsp;000&nbsp;₽.
+                </p>
+                <div class="result" data-result>
+                  <button class="result__head" type="button" aria-expanded="false">Что входит в результат<span class="result__icon" aria-hidden="true"></span></button>
+                  <ul class="result__list">
+                    <li>Структура экранов и акценты на конверсии</li>
+                    <li>Адаптивная версия под телефон и планшет</li>
+                    <li>Готовая к публикации страница с формами</li>
+                  </ul>
+                </div>
+              </div>
+              <button class="btn offer__btn" type="button" data-open-popup>Заказать</button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 7. ДЛЯ КОГО РАБОТАЕМ (сохранены все 4 интерактивные сцены) ============ -->
+      <section class="h-section h-who" id="who" data-section-id="who" data-section-title="Для кого работаем">
+        <div class="h-wrap">
+          <div class="h-head">
+            <div class="h-head__left">
+              <span class="h-kicker">Аудитория и специализация</span>
+              <h2 class="h-title">Для кого работаем</h2>
+            </div>
+            <p class="h-subtitle">
+              Понимаем задачи бизнеса разного масштаба — от&nbsp;локального старта до&nbsp;федеральной полки и&nbsp;производственных линеек.
+            </p>
+          </div>
+
+          <div class="who-list">
+            <!-- 1. Средний бизнес -->
+            <article class="who-item">
+              <div class="who-item__text">
+                <h3 class="who-item__title">Средний бизнес</h3>
+                <div class="who-item__bottom">
+                  <p class="who-item__p">Разрабатываем масштабируемые дизайн-системы для упаковки и&nbsp;коммуникаций различных сфер бизнеса.</p>
+                  <div class="h-ornament" aria-hidden="true">
+                    <img src="assets/img/orn-flower.svg" alt="" width="24" height="24" loading="lazy">
+                    <img src="assets/img/orn-subtract.svg" alt="" width="24" height="24" loading="lazy">
+                    <img src="assets/img/orn-flower.svg" alt="" width="24" height="24" loading="lazy">
+                  </div>
+                </div>
+              </div>
+              <div class="who-item__panel" aria-hidden="true">
+                <div class="who-boxes">
+                  <div class="who-box who-box--3"><img class="who-box__shadow" src="assets/img/box-shadow.svg" alt="" loading="lazy"><div class="who-box__lift"><img class="who-box__body" src="assets/img/box.svg" alt="" loading="lazy"><img class="who-box__lines" src="assets/img/box-lines-a.svg" alt="" loading="lazy"><span class="who-box__flower"><img src="assets/img/box-flower.png" alt="" loading="lazy"></span></div></div>
+                  <div class="who-box who-box--2"><img class="who-box__shadow" src="assets/img/box-shadow.svg" alt="" loading="lazy"><div class="who-box__lift"><img class="who-box__body" src="assets/img/box.svg" alt="" loading="lazy"><img class="who-box__lines" src="assets/img/box-lines-a.svg" alt="" loading="lazy"><span class="who-box__flower"><img src="assets/img/box-flower.png" alt="" loading="lazy"></span></div></div>
+                  <div class="who-box who-box--1"><img class="who-box__shadow" src="assets/img/box-shadow.svg" alt="" loading="lazy"><div class="who-box__lift"><img class="who-box__body" src="assets/img/box.svg" alt="" loading="lazy"><img class="who-box__lines" src="assets/img/box-lines-a.svg" alt="" loading="lazy"><span class="who-box__flower"><img src="assets/img/box-flower.png" alt="" loading="lazy"></span></div></div>
+                </div>
+              </div>
+            </article>
+
+            <!-- 2. Пищевая промышленность -->
+            <article class="who-item who-item--flip">
+              <div class="who-item__text">
+                <h3 class="who-item__title">Пищевая промышленность</h3>
+                <div class="who-item__bottom">
+                  <p class="who-item__p">Разрабатываем продающие упаковки и&nbsp;линейки товаров, которые выигрывают борьбу за&nbsp;внимание на&nbsp;полке.</p>
+                  <div class="h-ornament" aria-hidden="true">
+                    <img src="assets/img/orn-flower.svg" alt="" width="24" height="24" loading="lazy">
+                    <img src="assets/img/orn-x.svg" alt="" width="24" height="24" loading="lazy">
+                    <img src="assets/img/orn-flower.svg" alt="" width="24" height="24" loading="lazy">
+                  </div>
+                </div>
+              </div>
+              <div class="who-item__panel">
+                <div class="shelf" data-shelf aria-label="Интерактивная полка с бутылками: нажмите на любую бутылку"></div>
+              </div>
+            </article>
+
+            <!-- 3. Малый бизнес -->
+            <article class="who-item">
+              <div class="who-item__text">
+                <h3 class="who-item__title">Малый бизнес</h3>
+                <div class="who-item__bottom">
+                  <p class="who-item__p">Упакуем бизнес с&nbsp;нуля: сделаем вас заметнее, понятнее и&nbsp;привлекательнее для клиентов с&nbsp;первых продаж.</p>
+                  <div class="h-ornament" aria-hidden="true">
+                    <img src="assets/img/orn-flower.svg" alt="" width="24" height="24" loading="lazy">
+                    <img src="assets/img/orn-cross.svg" alt="" width="24" height="24" loading="lazy">
+                    <img src="assets/img/orn-flower.svg" alt="" width="24" height="24" loading="lazy">
+                  </div>
+                </div>
+              </div>
+              <div class="who-item__panel" aria-hidden="true">
+                <div class="ec-grid">
+                  <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                  <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                  <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                  <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                  <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                  <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                  <div class="ec ec--accent"><div class="ec__img"><img src="assets/img/ec-flower.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                  <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                  <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                  <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                  <div class="ec"><div class="ec__img"><img src="assets/img/ec-star.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                  <div class="ec"><div class="ec__img"><img src="assets/img/ec-cross.svg" alt="" loading="lazy"></div><div class="ec__lines"><i></i><i></i><i></i><i></i></div></div>
+                </div>
+              </div>
+            </article>
+
+            <!-- 4. Для всех -->
+            <article class="who-item who-item--flip">
+              <div class="who-item__text">
+                <h3 class="who-item__title">Для всех, кому нужен работающий визуал</h3>
+                <div class="who-item__bottom">
+                  <p class="who-item__p">Сделаем честный и&nbsp;сильный дизайн, который помогает продавать, а&nbsp;не&nbsp;просто украшает презентацию.</p>
+                  <div class="h-ornament" aria-hidden="true">
+                    <img src="assets/img/orn-flower-lined.svg" alt="" width="24" height="24" loading="lazy">
+                    <img src="assets/img/orn-star.svg" alt="" width="24" height="24" loading="lazy">
+                    <img src="assets/img/orn-flower-lined.svg" alt="" width="24" height="24" loading="lazy">
+                  </div>
+                </div>
+              </div>
+              <div class="who-item__panel" aria-hidden="true">
+                <div class="who-horses">
+                  <div class="htile"><img src="assets/img/horse-tile.svg" alt="" loading="lazy"><img class="htile__hover" src="assets/img/horse-tile-hover.svg" alt="" loading="lazy"></div>
+                  <div class="htile"><img src="assets/img/horse-tile.svg" alt="" loading="lazy"><img class="htile__hover" src="assets/img/horse-tile-hover.svg" alt="" loading="lazy"></div>
+                  <div class="htile"><img src="assets/img/horse-tile.svg" alt="" loading="lazy"><img class="htile__hover" src="assets/img/horse-tile-hover.svg" alt="" loading="lazy"></div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 8. ПРОЦЕСС И СРОКИ (читаемая статичная последовательность) ============ -->
+      <section class="h-section h-process" id="process" data-section-id="process" data-section-title="Процесс и сроки">
+        <div class="h-wrap">
+          <div class="h-head">
+            <div class="h-head__left">
+              <span class="h-kicker">Как мы работаем</span>
+              <h2 class="h-title">Процесс и сроки</h2>
+            </div>
+            <p class="h-subtitle">
+              Прозрачные этапы с&nbsp;понятными точками согласования — вы всегда видите, на&nbsp;каком шаге находится проект.
+            </p>
+          </div>
+
+          <ol class="process-grid">
+            <li class="process-step">
+              <div class="process-step__head">
+                <span class="process-step__num">01</span>
+                <span class="process-step__time">1 день</span>
+              </div>
+              <h3 class="process-step__title">Бриф</h3>
+              <p class="process-step__desc">Фиксируем бизнес-цель, портрет аудитории, состав носителей и&nbsp;технические требования печати или разработки.</p>
+            </li>
+
+            <li class="process-step">
+              <div class="process-step__head">
+                <span class="process-step__num">02</span>
+                <span class="process-step__time">3–5 дней</span>
+              </div>
+              <h3 class="process-step__title">Исследование и идея</h3>
+              <p class="process-step__desc">Изучаем полку, конкурентов и&nbsp;каналы продаж, формируем визуальную гипотезу и&nbsp;направления концепций.</p>
+            </li>
+
+            <li class="process-step">
+              <div class="process-step__head">
+                <span class="process-step__num">03</span>
+                <span class="process-step__time">5–10 дней</span>
+              </div>
+              <h3 class="process-step__title">Дизайн-спринт</h3>
+              <p class="process-step__desc">Разрабатываем ключевые макеты, проверяем читаемость, масштаб и&nbsp;то, как бренд работает на&nbsp;реальных носителях.</p>
+            </li>
+
+            <li class="process-step">
+              <div class="process-step__head">
+                <span class="process-step__num">04</span>
+                <span class="process-step__time">2–3 дня</span>
+              </div>
+              <h3 class="process-step__title">Согласование</h3>
+              <p class="process-step__desc">Презентуем решения с&nbsp;аргументацией, собираем обратную связь и&nbsp;доводим детали без лишних итераций.</p>
+            </li>
+
+            <li class="process-step">
+              <div class="process-step__head">
+                <span class="process-step__num">05</span>
+                <span class="process-step__time">2–3 дня</span>
+              </div>
+              <h3 class="process-step__title">Подготовка макетов</h3>
+              <p class="process-step__desc">Собираем исходники, бренд-гайд и&nbsp;допечатную подготовку для типографии или аккуратную передачу в&nbsp;разработку.</p>
+            </li>
+
+            <li class="process-step">
+              <div class="process-step__head">
+                <span class="process-step__num">06</span>
+                <span class="process-step__time">Постоянно</span>
+              </div>
+              <h3 class="process-step__title">Запуск и поддержка</h3>
+              <p class="process-step__desc">Помогаем с&nbsp;внедрением, контролируем качество печати и&nbsp;продолжаем развивать бренд по&nbsp;дизайн-подписке.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ 9. ПАКЕТЫ И ЦЕНЫ (комплексные проекты 140 / 210 / 320 тыс. ₽) ============ -->
+      <section class="h-section h-section--dark packages" id="packages" data-section-id="packages" data-section-title="Пакеты и цены">
+        <div class="h-wrap">
+          <div class="h-head">
+            <div class="h-head__left">
+              <span class="h-kicker">Комплексные проекты</span>
+              <h2 class="h-title">Пакеты и цены</h2>
+            </div>
+            <p class="h-subtitle">
+              Цены ориентировочные. Точную смету и&nbsp;план работ пришлём в&nbsp;течение 24&nbsp;часов после короткого обсуждения задачи.
+            </p>
+          </div>
+
+          <div class="offer-grid offer-grid--three">
+            <article class="offer" data-offer-card>
+              <div class="offer__top">
+                <img class="offer__icon" src="assets/img/icon-pkg-start.svg" alt="" width="54" height="57" loading="lazy">
+                <span class="offer__price">140 000 ₽</span>
+              </div>
+              <div class="offer__body">
+                <span class="offer__meta">Базовый запуск</span>
+                <h3 class="offer__title" data-offer-title>Старт</h3>
+                <p class="offer__desc">
+                  Для запуска нового продукта или обновления базовой айдентики, когда нужно быстро и&nbsp;уверенно выйти на&nbsp;рынок.
+                </p>
+                <div class="result" data-result>
+                  <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
+                  <ul class="result__list">
+                    <li>Логотип (2 концепции + 2 круга правок)</li>
+                    <li>Фирменная палитра, шрифты и графика</li>
+                    <li>Оформление базовых носителей + мини бренд-гайд</li>
+                  </ul>
+                </div>
+              </div>
+              <button class="btn offer__btn" type="button" data-open-popup>Заказать</button>
+            </article>
+
+            <article class="offer" data-offer-card>
+              <div class="offer__top">
+                <img class="offer__icon" src="assets/img/icon-pkg-growth.svg" alt="" width="54" height="57" loading="lazy">
+                <span class="offer__price">210 000 ₽</span>
+              </div>
+              <div class="offer__body">
+                <span class="offer__meta">Упаковка + стиль</span>
+                <h3 class="offer__title" data-offer-title>Рост</h3>
+                <p class="offer__desc">
+                  Для компаний, которым нужна цельная визуальная система, сильная упаковка на&nbsp;полку и&nbsp;материалы для продаж.
+                </p>
+                <div class="result" data-result>
+                  <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
+                  <ul class="result__list">
+                    <li>Расширенный фирменный стиль и правила вёрстки</li>
+                    <li>Мастер-макет упаковки или посадочная страница</li>
+                    <li>Предпечатная подготовка и расширенный гайд</li>
+                  </ul>
+                </div>
+              </div>
+              <button class="btn offer__btn" type="button" data-open-popup>Заказать</button>
+            </article>
+
+            <article class="offer" data-offer-card>
+              <div class="offer__top">
+                <img class="offer__icon" src="assets/img/icon-pkg-system.svg" alt="" width="54" height="57" loading="lazy">
+                <span class="offer__price">320 000 ₽</span>
+              </div>
+              <div class="offer__body">
+                <span class="offer__meta">Под ключ</span>
+                <h3 class="offer__title" data-offer-title>Система</h3>
+                <p class="offer__desc">
+                  Комплексная экосистема бренда для производств и&nbsp;растущих компаний: от&nbsp;позиционирования до&nbsp;контроля внедрения.
+                </p>
+                <div class="result" data-result>
+                  <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
+                  <ul class="result__list">
+                    <li>Полный брендинг и брендбук со всеми носителями</li>
+                    <li>Линейка упаковки до 5 позиций или корпоративный сайт</li>
+                    <li>Согласование с типографией и авторский надзор</li>
+                  </ul>
+                </div>
+              </div>
+              <button class="btn offer__btn" type="button" data-open-popup>Заказать</button>
+            </article>
+          </div>
+
+          <div class="h-packages__foot">
+            <p class="h-projects__note">Не уверены, какой пакет подойдёт под вашу задачу? Подберём оптимальный формат за&nbsp;один звонок.</p>
+            <button class="btn btn--red btn--big" type="button" data-open-popup>Обсудим проект?</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 10. КОНТАКТЫ И ФИНАЛЬНЫЙ CTA ============ -->
+      <section class="h-section h-contacts" id="contacts" data-section-id="contacts" data-section-title="Контакты">
+        <div class="h-wrap">
+          <div class="h-contacts__box">
+            <div class="h-contacts__lead">
+              <span class="h-kicker">Связаться со студией</span>
+              <h2 class="h-title">Готовы обсудить вашу задачу?</h2>
+              <p class="h-subtitle">
+                Расскажите коротко о&nbsp;продукте, сроках или регулярных задачах — предложим формат работы и&nbsp;ориентир по&nbsp;бюджету.
+              </p>
+              <div class="h-contacts__cta-row">
+                <button class="btn btn--red" type="button" data-open-popup>Обсудить проект</button>
+                <a class="btn btn--outline" href="tel:+73537420020">Позвонить</a>
+              </div>
+            </div>
+
+            <div class="h-contacts__info">
+              <div class="contact-item">
+                <span class="contact-item__label">Телефон</span>
+                <a class="contact-item__value" href="tel:+73537420020">+7 (3537) 42-00-20</a>
+                <p class="contact-item__hint">Основной подтверждённый номер для связи</p>
+              </div>
+
+              <div class="contact-item">
+                <span class="contact-item__label">Мессенджеры и соцсети</span>
+                <p class="contact-item__hint">
+                  Прямые ссылки на&nbsp;сообщество <strong>ВКонтакте</strong> и&nbsp;канал <strong>MAX</strong> появятся здесь сразу после финального подтверждения ссылок.
+                </p>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Для всех -->
-        <div class="who-block who-block--all">
-          <div class="who-panel who-panel--horses">
-            <div class="htile" style="left:7rem; top:7.989rem"><img src="assets/img/horse-tile.svg" alt=""><img class="htile__hover" src="assets/img/horse-tile-hover.svg" alt=""></div>
-            <div class="htile" style="left:26.002rem; top:19.643rem"><img src="assets/img/horse-tile.svg" alt=""><img class="htile__hover" src="assets/img/horse-tile-hover.svg" alt=""></div>
-            <div class="htile" style="left:45.003rem; top:32.48rem"><img src="assets/img/horse-tile.svg" alt=""><img class="htile__hover" src="assets/img/horse-tile-hover.svg" alt=""></div>
-          </div>
-          <div class="who-text">
-            <h3 class="h2">Для всех, кому нужен работающий визуал</h3>
-            <div class="who-text__bottom">
-              <p class="who-text__p">Сделаем крутой дизайн,<br>который будет работать на бизнес</p>
-              <div class="ornament"><img src="assets/img/orn-flower-lined.svg" alt=""><img src="assets/img/orn-star.svg" alt=""><img src="assets/img/orn-flower-lined.svg" alt=""></div>
+      <!-- ============ FOOTER ============ -->
+      <footer class="h-footer" data-section-id="footer" data-section-title="Подвал сайта">
+        <div class="h-wrap">
+          <div class="h-footer__grid">
+            <nav class="h-footer__nav" aria-label="Навигация в подвале">
+              <a class="h-footer__link" href="projects/">Проекты</a>
+              <a class="h-footer__link" href="#services">Услуги</a>
+              <a class="h-footer__link" href="#subscription">Дизайн-подписка</a>
+              <a class="h-footer__link" href="neurovideo/">Нейровидео</a>
+              <a class="h-footer__link" href="#contacts">Контакты</a>
+            </nav>
+
+            <div class="h-footer__legal">
+              <a class="logo" href="#hero" aria-label="Красный конь — наверх">
+                <img class="logo__horse" src="assets/img/logo-horse.svg" alt="" width="36" height="35" loading="lazy">
+                <img class="logo__word" src="assets/img/logo-wordmark.svg" alt="Красный конь" width="156" height="29" loading="lazy">
+              </a>
+              <p class="h-footer__copy">
+                © 2011–2026 Digital интегратор WebCat<br>
+                ИНН 5614087228, ООО ВЕБКАТ
+              </p>
+            </div>
+
+            <div class="h-footer__art" aria-hidden="true">
+              <img class="h-footer__horse" src="assets/img/horse-3d.webp" alt="" width="1152" height="1578" loading="lazy" decoding="async">
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </footer>
+    </main>
 
-    <!-- ============ 5. ПРОЦЕСС И СРОКИ ============ -->
-    <section class="process" id="process">
-      <h2 class="section-title">Процесс <span class="nowrap">и сроки</span></h2>
-      <div class="process__body">
-        <ul class="process__list" role="tablist" data-process-list></ul>
-        <div class="process__info">
-          <h3 class="process__name" data-process-name>БРИФ</h3>
-          <p class="process__time" data-process-time>1 день</p>
-          <div class="process__bar" data-process-bar><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <p class="process__desc" data-process-desc></p>
-        </div>
-      </div>
-    </section>
+    <!-- ============ СЛОТ БУДУЩЕГО ИИ-АССИСТЕНТА (скрыт по умолчанию, 0px ширины) ============ -->
+    <aside class="page-assistant" id="ai-assistant-slot" data-ai-slot aria-label="ИИ-ассистент" hidden></aside>
+  </div>
 
-    <!-- ============ 6. ПАКЕТЫ И ЦЕНЫ ============ -->
-    <section class="packages" id="packages">
-      <div class="packages__head">
-        <h2 class="section-title packages__title">пакеты <span class="nowrap">и цены</span></h2>
-        <p class="packages__note">Цены ориентировочные.<br>Точную смету пришлём  в течении 24 часов</p>
-      </div>
-
-      <div class="offer-row" data-drag-scroll>
-        <article class="offer">
-          <div class="offer__top">
-            <img class="offer__icon" src="assets/img/icon-pkg-start.svg" alt="" width="54" height="57">
-            <span class="offer__price">140 000 ₽</span>
-          </div>
-          <div class="offer__body">
-            <h3 class="offer__title">старт</h3>
-            <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-            <div class="result" data-result>
-              <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
-              <ul class="result__list"><li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li></ul>
-            </div>
-          </div>
-          <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
-        </article>
-        <article class="offer">
-          <div class="offer__top">
-            <img class="offer__icon" src="assets/img/icon-pkg-growth.svg" alt="" width="54" height="57">
-            <span class="offer__price">210 000 ₽</span>
-          </div>
-          <div class="offer__body">
-            <h3 class="offer__title">рост</h3>
-            <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-            <div class="result" data-result>
-              <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
-              <ul class="result__list"><li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li></ul>
-            </div>
-          </div>
-          <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
-        </article>
-        <article class="offer">
-          <div class="offer__top">
-            <img class="offer__icon" src="assets/img/icon-pkg-system.svg" alt="" width="54" height="57">
-            <span class="offer__price">320 000 ₽</span>
-          </div>
-          <div class="offer__body">
-            <h3 class="offer__title">система</h3>
-            <p class="offer__desc">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-            <div class="result" data-result>
-              <button class="result__head" type="button" aria-expanded="false">Результат<span class="result__icon" aria-hidden="true"></span></button>
-              <ul class="result__list"><li>2 концепции</li><li>2 круга правок</li><li>Мини бренд-гайд</li></ul>
-            </div>
-          </div>
-          <button class="btn offer__btn" type="button" data-open-popup>заказать</button>
-        </article>
-      </div>
-
-      <button class="btn btn--red btn--big packages__cta" type="button" data-open-popup>Обсудим проект?</button>
-    </section>
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer" id="contacts">
-    <div class="footer__green" aria-hidden="true"></div>
-    <!-- конь выходит вверх на блок с ценами, снизу обрезается краем страницы -->
-    <div class="footer__horse-clip" aria-hidden="true"><div class="footer__horse"><div class="footer__horse-inner"><img src="assets/img/horse-3d.webp" alt="" loading="lazy"></div></div></div>
-    <div class="footer__content">
-      <nav class="big-links">
-        <a class="big-link" href="#projects"><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Проекты</span></a>
-        <a class="big-link" href="#services"><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Услуги</span></a>
-        <a class="big-link" href="#contacts"><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">контакты</span></a>
-      </nav>
-      <div class="footer__bottom">
-        <div class="socials">
-          <a href="#" aria-label="Telegram"><img src="assets/img/tg.svg" alt="" width="61" height="52"></a>
-          <a href="#" aria-label="ВКонтакте"><img src="assets/img/vk.svg" alt="" width="74" height="43"></a>
-        </div>
-        <p class="footer__copy">© 2011-2025 Digital интегратор WebCat<br>ИНН 5614087228, ООО ВЕБКАТ</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ============ МЕНЮ (оверлей) ============ -->
+  <!-- ============ МЕНЮ (оверлей для планшета/мобильного) ============ -->
   <div class="menu" id="menu" aria-hidden="true">
-    <img class="menu__flower" src="assets/img/menu-flower.svg" alt="" aria-hidden="true">
+    <img class="menu__flower" src="assets/img/menu-flower.svg" alt="" aria-hidden="true" loading="lazy">
     <div class="menu__header">
-      <a class="logo" href="#top" data-close-menu aria-label="Красный конь — на главную">
+      <a class="logo" href="#hero" data-close-menu aria-label="Красный конь — на главную">
         <img class="logo__horse" src="assets/img/logo-horse.svg" alt="" width="52" height="51">
         <img class="logo__word" src="assets/img/logo-wordmark-white.svg" alt="Красный конь" width="223" height="41">
       </a>
-      <nav class="header__nav">
-        <a class="header__phone header__phone--white" href="tel:+73537420020">+7(3537)42-00-20</a>
-        <button class="header__cta link-green" type="button" data-open-popup>обсудить проект</button>
-      </nav>
-      <button class="menu__close" type="button" aria-label="Закрыть меню" data-close-menu><img src="assets/img/close-white.svg" alt="" width="44" height="44"></button>
+      <button class="menu__close" type="button" aria-label="Закрыть меню" data-close-menu>
+        <img src="assets/img/close-white.svg" alt="" width="44" height="44">
+      </button>
     </div>
-    <nav class="big-links big-links--menu">
-      <a class="big-link" href="#projects" data-close-menu><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Проекты</span></a>
-      <a class="big-link" href="neurovideo/"><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Нейровидео</span></a>
+
+    <nav class="big-links big-links--menu" aria-label="Мобильное меню">
+      <a class="big-link" href="projects/"><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Проекты</span></a>
       <a class="big-link" href="#services" data-close-menu><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Услуги</span></a>
-      <a class="big-link" href="#contacts" data-close-menu><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">контакты</span></a>
+      <a class="big-link" href="#subscription" data-close-menu><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Подписка</span></a>
+      <a class="big-link" href="neurovideo/"><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Нейровидео</span></a>
+      <a class="big-link" href="#contacts" data-close-menu><span class="big-link__inner"><img src="assets/img/triangle-red.svg" alt="" class="big-link__arrow">Контакты</span></a>
     </nav>
-    <div class="socials menu__socials">
-      <a href="#" aria-label="Telegram"><img src="assets/img/tg.svg" alt="" width="61" height="52"></a>
-      <a href="#" aria-label="ВКонтакте"><img src="assets/img/vk.svg" alt="" width="74" height="43"></a>
+
+    <div class="menu__meta">
+      <div class="menu__contacts">
+        <a class="menu__phone" href="tel:+73537420020">+7 (3537) 42-00-20</a>
+        <button class="btn btn--red" type="button" data-open-popup>Обсудить проект</button>
+      </div>
+      <p class="menu__copy">© 2011–2026 Digital интегратор WebCat<br>ИНН 5614087228, ООО ВЕБКАТ</p>
     </div>
-    <p class="menu__copy">© 2011-2025 Digital интегратор WebCat<br> ИНН 5614087228, ООО ВЕБКАТ</p>
   </div>
 
-  <!-- ============ ПОП-АП «Познакомимся?» ============ -->
+  <!-- ============ ПОП-АП «Познакомимся?» (preview-режим до подключения CRM в P0-F) ============ -->
   <div class="popup" id="popup" aria-hidden="true">
     <div class="popup__overlay" data-close-popup></div>
     <div class="popup__card" role="dialog" aria-modal="true" aria-labelledby="popup-title">
       <div class="popup__view popup__view--form">
         <div class="popup__head">
           <h2 class="popup__title" id="popup-title" data-popup-title>Познакомимся?</h2>
-          <p class="popup__sub" data-popup-sub>Мы свяжемся с вами в течение<br><span>30 минут</span></p>
+          <p class="popup__sub" data-popup-sub>Оставьте контакты — обсудим задачу и&nbsp;ориентир по&nbsp;срокам</p>
         </div>
-        <button class="popup__close" type="button" aria-label="Закрыть" data-close-popup><img src="assets/img/close-green.svg" alt="" width="32" height="32"></button>
+        <button class="popup__close" type="button" aria-label="Закрыть" data-close-popup>
+          <img src="assets/img/close-green.svg" alt="" width="32" height="32">
+        </button>
 
-        <form class="popup__form" id="lead-form" novalidate>
+        <form class="popup__form" id="lead-form" data-form-mode="preview" novalidate>
           <input type="hidden" name="service" value="">
           <div class="popup__fields">
             <label class="field"><input type="text" name="name" placeholder="От кого" autocomplete="name" required></label>
             <label class="field"><input type="tel" name="phone" placeholder="Номер телефона" autocomplete="tel" required></label>
             <label class="field"><input type="text" name="message" placeholder="Коротко опишите запрос"></label>
           </div>
-          <button class="btn popup__submit" type="submit">отправить</button>
+          <p class="popup__notice">Preview-версия: форма работает в&nbsp;тестовом режиме без отправки на&nbsp;сервер. Подключение CRM и&nbsp;документов ПД запланировано на&nbsp;этап P0-F.</p>
+          <button class="btn popup__submit" type="submit">Отправить (тест)</button>
         </form>
 
         <div class="stamp" aria-hidden="true">
@@ -484,18 +964,17 @@
         </div>
       </div>
 
-      <!-- состояние после отправки (Figma: popup услуг, state=on click) -->
       <div class="popup__view popup__view--done" aria-live="polite">
         <img class="popup__flap" src="assets/img/envelope-flap.svg" alt="">
         <div class="popup__thanks">
-          <p class="popup__thanks-title">Спасибо за письмо!</p>
-          <p class="popup__thanks-text">Мы перезвоним вам в течение 30 минут</p>
+          <p class="popup__thanks-title" data-popup-thanks-title>Тестовый режим (preview)</p>
+          <p class="popup__thanks-text" data-popup-thanks-text>Заявка не отправлена на сервер — подключение CRM запланировано на следующий этап. Для связи: +7 (3537) 42-00-20.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="js/common.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/common.js?v=3"></script>
+  <script src="js/main.js?v=3"></script>
 </body>
 </html>
