@@ -156,18 +156,19 @@
       <div class="popup__view popup__view--form">
         <div class="popup__head">
           <h2 class="popup__title" id="popup-title" data-popup-title>Познакомимся?</h2>
-          <p class="popup__sub" data-popup-sub>Мы свяжемся с вами в течение<br><span>30 минут</span></p>
+          <p class="popup__sub" data-popup-sub>Оставьте контакты — обсудим задачу и&nbsp;ориентир по&nbsp;срокам</p>
         </div>
         <button class="popup__close" type="button" aria-label="Закрыть" data-close-popup><img src="../assets/img/close-green.svg" alt="" width="32" height="32"></button>
 
-        <form class="popup__form" id="lead-form" novalidate>
+        <form class="popup__form" id="lead-form" data-form-mode="preview" novalidate>
           <input type="hidden" name="service" value="">
           <div class="popup__fields">
             <label class="field"><input type="text" name="name" placeholder="От кого" autocomplete="name" required></label>
             <label class="field"><input type="tel" name="phone" placeholder="Номер телефона" autocomplete="tel" required></label>
             <label class="field"><input type="text" name="message" placeholder="Коротко опишите запрос"></label>
           </div>
-          <button class="btn popup__submit" type="submit">отправить</button>
+          <p class="popup__notice">Тестовый режим: форма пока не отправляет заявки на&nbsp;сервер. Для связи: +7 (3537) 42-00-20.</p>
+          <button class="btn popup__submit" type="submit">Отправить (тест)</button>
         </form>
 
         <div class="stamp" aria-hidden="true">
@@ -181,8 +182,8 @@
       <div class="popup__view popup__view--done" aria-live="polite">
         <img class="popup__flap" src="../assets/img/envelope-flap.svg" alt="">
         <div class="popup__thanks">
-          <p class="popup__thanks-title">Спасибо за письмо!</p>
-          <p class="popup__thanks-text">Мы перезвоним вам в течение 30 минут</p>
+          <p class="popup__thanks-title" data-popup-thanks-title>Тестовый режим (preview)</p>
+          <p class="popup__thanks-text" data-popup-thanks-text>Заявка не отправлена на сервер — подключение CRM запланировано на следующий этап. Для связи: +7 (3537) 42-00-20.</p>
         </div>
       </div>
     </div>

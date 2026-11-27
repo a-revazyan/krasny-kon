@@ -85,13 +85,19 @@
     getSnapshot: collectPublicContext,
   };
 
-  /* ---------- 3. Preview-Only AI Slot Verification (?ai-preview=1, blocked on prod) ---------- */
+  /* ---------- 3. Preview-Only AI Slot Verification (?ai-preview=1 on local hosts ONLY) ---------- */
   (function initAiPreviewMode() {
     const params = new URLSearchParams(window.location.search);
     if (params.get('ai-preview') !== '1') return;
 
     const host = window.location.hostname;
-    if (host === 'redkon.ru' || host === 'www.redkon.ru') return;
+    const isLocalHost =
+      window.location.protocol === 'file:' ||
+      host === 'localhost' ||
+      host === '127.0.0.1' ||
+      host === '[::1]' ||
+      host === '::1';
+    if (!isLocalHost) return;
 
     const slot = $('[data-ai-slot]');
     if (!slot) return;
