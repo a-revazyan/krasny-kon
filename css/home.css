@@ -1013,9 +1013,10 @@ body[data-ai-enabled="true"] .page-assistant:not([hidden]) {
 
 .sub-card__top {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: .8rem 1rem;
 }
 .sub-card__name {
   font-family: "Monoid", monospace;
@@ -1086,8 +1087,11 @@ body[data-ai-enabled="true"] .page-assistant:not([hidden]) {
 .sub-card__btn {
   margin-top: auto;
   width: 100%;
-  padding: 1.5rem 2rem;
-  font-size: 1.4rem;
+  padding: 1.5rem 1.8rem;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  white-space: normal;
+  text-align: center;
 }
 
 .h-sub__disclaimer {
@@ -1260,8 +1264,11 @@ body[data-ai-enabled="true"] .page-assistant:not([hidden]) {
 
 .offer__btn {
   width: 100%;
-  padding: 1.6rem 2rem;
-  font-size: 1.5rem;
+  padding: 1.6rem 1.8rem;
+  font-size: 1.45rem;
+  line-height: 1.35;
+  white-space: normal;
+  text-align: center;
 }
 
 .h-packages__foot {
