@@ -51,6 +51,62 @@
     }
   })();
 
+  /* ---------- 2b. Interactive Process & Timeline (hover/click/focus + animated progress bar) ---------- */
+  (function initProcess() {
+    const root = $('[data-process]');
+    if (!root) return;
+    const tabs = $$('[data-process-tab]', root);
+    const panels = $$('[data-process-panel]', root);
+    const fill = $('[data-process-fill]', root);
+    const view = $('.process-stage__view', root);
+    if (!tabs.length || !panels.length || !fill || !view) return;
+
+    // Render active description cleanly right below the animated progress bar while keeping all text in semantic panels
+    const descBox = document.createElement('p');
+    descBox.className = 'process-stage__active-desc';
+    descBox.setAttribute('aria-live', 'polite');
+    view.appendChild(descBox);
+
+    let current = 0;
+    function select(index) {
+      current = Math.max(0, Math.min(tabs.length - 1, index));
+      tabs.forEach((tab, idx) => {
+        const active = idx === current;
+        tab.classList.toggle('is-active', active);
+        tab.setAttribute('aria-selected', String(active));
+      });
+      panels.forEach((panel, idx) => {
+        const active = idx === current;
+        panel.hidden = !active;
+        panel.classList.toggle('is-active', active);
+      });
+      fill.style.setProperty('--step', String(current + 1));
+      const activeDesc = $('.process-stage__desc', panels[current]);
+      if (activeDesc) descBox.textContent = activeDesc.textContent.trim();
+    }
+
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener('mouseenter', () => select(idx));
+      tab.addEventListener('focus', () => select(idx));
+      tab.addEventListener('click', () => select(idx));
+      tab.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+          e.preventDefault();
+          const next = (idx + 1) % tabs.length;
+          select(next);
+          tabs[next].focus();
+        } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+          e.preventDefault();
+          const prev = (idx - 1 + tabs.length) % tabs.length;
+          select(prev);
+          tabs[prev].focus();
+        }
+      });
+    });
+
+    select(0);
+  })();
+
   /* ---------- 3. Read-only AI Context Contract Helper (no LLM/API/observers active in P0-V) ---------- */
   function collectPublicContext() {
     const pageId = body.dataset.pageId || 'home';

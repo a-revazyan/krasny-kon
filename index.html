@@ -8,7 +8,7 @@
   <link rel="preload" href="assets/fonts/Monoid-Bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/Golos-UI_Regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/style.css?v=3">
-  <link rel="stylesheet" href="css/home.css?v=3">
+  <link rel="stylesheet" href="css/home.css?v=4">
 </head>
 <body class="home" data-page-id="home" data-ai-enabled="false">
 
@@ -683,61 +683,73 @@
             </p>
           </div>
 
-          <ol class="process-grid">
-            <li class="process-step">
-              <div class="process-step__head">
-                <span class="process-step__num">01</span>
-                <span class="process-step__time">1 день</span>
-              </div>
-              <h3 class="process-step__title">Бриф</h3>
-              <p class="process-step__desc">Фиксируем бизнес-цель, портрет аудитории, состав носителей и&nbsp;технические требования печати или разработки.</p>
-            </li>
+          <div class="process-stage" data-process>
+            <ul class="process-stage__list" role="tablist" aria-label="Этапы работы">
+              <li>
+                <button class="process-stage__tab is-active" type="button" role="tab" id="proc-tab-0" aria-selected="true" aria-controls="proc-panel-0" data-process-tab="0">Бриф</button>
+              </li>
+              <li>
+                <button class="process-stage__tab" type="button" role="tab" id="proc-tab-1" aria-selected="false" aria-controls="proc-panel-1" data-process-tab="1">Исследование и идея</button>
+              </li>
+              <li>
+                <button class="process-stage__tab" type="button" role="tab" id="proc-tab-2" aria-selected="false" aria-controls="proc-panel-2" data-process-tab="2">Дизайн-спринт</button>
+              </li>
+              <li>
+                <button class="process-stage__tab" type="button" role="tab" id="proc-tab-3" aria-selected="false" aria-controls="proc-panel-3" data-process-tab="3">Согласование</button>
+              </li>
+              <li>
+                <button class="process-stage__tab" type="button" role="tab" id="proc-tab-4" aria-selected="false" aria-controls="proc-panel-4" data-process-tab="4">Подготовка макетов</button>
+              </li>
+              <li>
+                <button class="process-stage__tab" type="button" role="tab" id="proc-tab-5" aria-selected="false" aria-controls="proc-panel-5" data-process-tab="5">Запуск и поддержка</button>
+              </li>
+            </ul>
 
-            <li class="process-step">
-              <div class="process-step__head">
-                <span class="process-step__num">02</span>
-                <span class="process-step__time">3–5 дней</span>
+            <div class="process-stage__view">
+              <div class="process-stage__bar" aria-hidden="true" data-process-bar>
+                <span class="process-stage__fill" data-process-fill></span>
+                <i></i><i></i><i></i><i></i><i></i><i></i>
               </div>
-              <h3 class="process-step__title">Исследование и идея</h3>
-              <p class="process-step__desc">Изучаем полку, конкурентов и&nbsp;каналы продаж, формируем визуальную гипотезу и&nbsp;направления концепций.</p>
-            </li>
 
-            <li class="process-step">
-              <div class="process-step__head">
-                <span class="process-step__num">03</span>
-                <span class="process-step__time">5–10 дней</span>
-              </div>
-              <h3 class="process-step__title">Дизайн-спринт</h3>
-              <p class="process-step__desc">Разрабатываем ключевые макеты, проверяем читаемость, масштаб и&nbsp;то, как бренд работает на&nbsp;реальных носителях.</p>
-            </li>
+              <div class="process-stage__panels">
+                <article class="process-stage__panel is-active" role="tabpanel" id="proc-panel-0" aria-labelledby="proc-tab-0" data-process-panel="0">
+                  <h3 class="process-stage__name">Бриф</h3>
+                  <p class="process-stage__time">1 день</p>
+                  <p class="process-stage__desc">Фиксируем бизнес-цель, портрет аудитории, состав носителей и&nbsp;технические требования печати или разработки.</p>
+                </article>
 
-            <li class="process-step">
-              <div class="process-step__head">
-                <span class="process-step__num">04</span>
-                <span class="process-step__time">2–3 дня</span>
-              </div>
-              <h3 class="process-step__title">Согласование</h3>
-              <p class="process-step__desc">Презентуем решения с&nbsp;аргументацией, собираем обратную связь и&nbsp;доводим детали без лишних итераций.</p>
-            </li>
+                <article class="process-stage__panel" role="tabpanel" id="proc-panel-1" aria-labelledby="proc-tab-1" data-process-panel="1" hidden>
+                  <h3 class="process-stage__name">Исследование и идея</h3>
+                  <p class="process-stage__time">3–5 дней</p>
+                  <p class="process-stage__desc">Изучаем полку, конкурентов и&nbsp;каналы продаж, формируем визуальную гипотезу и&nbsp;направления концепций.</p>
+                </article>
 
-            <li class="process-step">
-              <div class="process-step__head">
-                <span class="process-step__num">05</span>
-                <span class="process-step__time">2–3 дня</span>
-              </div>
-              <h3 class="process-step__title">Подготовка макетов</h3>
-              <p class="process-step__desc">Собираем исходники, бренд-гайд и&nbsp;допечатную подготовку для типографии или аккуратную передачу в&nbsp;разработку.</p>
-            </li>
+                <article class="process-stage__panel" role="tabpanel" id="proc-panel-2" aria-labelledby="proc-tab-2" data-process-panel="2" hidden>
+                  <h3 class="process-stage__name">Дизайн-спринт</h3>
+                  <p class="process-stage__time">5–10 дней</p>
+                  <p class="process-stage__desc">Разрабатываем ключевые макеты, проверяем читаемость, масштаб и&nbsp;то, как бренд работает на&nbsp;реальных носителях.</p>
+                </article>
 
-            <li class="process-step">
-              <div class="process-step__head">
-                <span class="process-step__num">06</span>
-                <span class="process-step__time">Постоянно</span>
+                <article class="process-stage__panel" role="tabpanel" id="proc-panel-3" aria-labelledby="proc-tab-3" data-process-panel="3" hidden>
+                  <h3 class="process-stage__name">Согласование</h3>
+                  <p class="process-stage__time">2–3 дня</p>
+                  <p class="process-stage__desc">Презентуем решения с&nbsp;аргументацией, собираем обратную связь и&nbsp;доводим детали без лишних итераций.</p>
+                </article>
+
+                <article class="process-stage__panel" role="tabpanel" id="proc-panel-4" aria-labelledby="proc-tab-4" data-process-panel="4" hidden>
+                  <h3 class="process-stage__name">Подготовка макетов</h3>
+                  <p class="process-stage__time">2–3 дня</p>
+                  <p class="process-stage__desc">Собираем исходники, бренд-гайд и&nbsp;допечатную подготовку для типографии или аккуратную передачу в&nbsp;разработку.</p>
+                </article>
+
+                <article class="process-stage__panel" role="tabpanel" id="proc-panel-5" aria-labelledby="proc-tab-5" data-process-panel="5" hidden>
+                  <h3 class="process-stage__name">Запуск и поддержка</h3>
+                  <p class="process-stage__time">Постоянно</p>
+                  <p class="process-stage__desc">Помогаем с&nbsp;внедрением, контролируем качество печати и&nbsp;продолжаем развивать бренд по&nbsp;дизайн-подписке.</p>
+                </article>
               </div>
-              <h3 class="process-step__title">Запуск и поддержка</h3>
-              <p class="process-step__desc">Помогаем с&nbsp;внедрением, контролируем качество печати и&nbsp;продолжаем развивать бренд по&nbsp;дизайн-подписке.</p>
-            </li>
-          </ol>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -975,6 +987,6 @@
   </div>
 
   <script src="js/common.js?v=3"></script>
-  <script src="js/main.js?v=3"></script>
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>
